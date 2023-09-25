@@ -6,6 +6,7 @@ import com.qsspy.bands.application.common.port.output.GetBandByIdRepository;
 import com.qsspy.bands.application.member.changeprivileges.port.input.ChangeMemberPrivilegesCommand;
 import com.qsspy.bands.application.member.changeprivileges.port.input.ChangeMemberPrivilegesCommandHandler;
 import com.qsspy.bands.domain.band.Band;
+import com.qsspy.commons.port.output.publisher.DomainEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

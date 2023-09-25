@@ -10,7 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(
 		scanBasePackages = {
 				"com.qsspy.authservice",
-				"com.qsspy.gateway"
+				"com.qsspy.gateway",
+				"com.qsspy.commons.port.output.publisher"
 		}
 )
 @EnableJpaRepositories(
