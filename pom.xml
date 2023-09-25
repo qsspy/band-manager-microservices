@@ -15,14 +15,15 @@
 	<name>band-manager</name>
 	<description>Monolithic version of band manager</description>
 	<modules>
-		<module>auth-service</module>
 		<module>boot</module>
 		<module>bands</module>
 		<module>commons</module>
         <module>finances</module>
         <module>calendars</module>
         <module>domain-core</module>
-    </modules>
+		<module>api-gateway</module>
+		<module>bands-command</module>
+	</modules>
 
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>
@@ -33,10 +34,18 @@
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 
 		<lombok.version>1.18.30</lombok.version>
+		<spring-cloud-dependencies.version>2022.0.4</spring-cloud-dependencies.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud-dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<dependency>
 				<groupId>com.qsspy</groupId>
 				<artifactId>auth-service</artifactId>
