@@ -27,7 +27,7 @@ interface JpaDefaultBandPrivilegesQueryRepository extends JpaRepository<BandMemb
                 
                 p.canSeeCalendarEntryByDefault.isAllowed,
                 p.canSeeCalendarEntryPaymentByDefault.isAllowed,
-                p.canSeeCalendarEntryDetailsByDefault.isAllow
+                p.canSeeCalendarEntryDetailsByDefault.isAllowed
            )
            FROM DEFAULT_BAND_PRIVILEGES p
            WHERE
