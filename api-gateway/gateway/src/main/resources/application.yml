@@ -53,3 +53,5 @@ server:
 clients:
   bands-command:
     url: localhost:8081
+  finances-command:
+    url: localhost:8082

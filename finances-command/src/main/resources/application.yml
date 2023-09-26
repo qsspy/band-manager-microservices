@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: api-gateway
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bm-monolith-db
+    username: sa
+    password: password
+    driverClassName: org.postgresql.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update # TODO remove in future
+  cloud:
+    stream:
+      default:
+        group: ${spring.application.name}
+        content-type: application/json
+      kafka:
+        binder:
+          auto-create-topics: true #TODO remove for manual topic creation
+          brokers: kafka1:9091,kafka2:9092,kafka3:9093
+server:
+  port: 8082

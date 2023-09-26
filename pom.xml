@@ -23,7 +23,8 @@
         <module>domain-core</module>
 		<module>api-gateway</module>
 		<module>bands-command</module>
-	</modules>
+        <module>finances-command</module>
+    </modules>
 
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>
