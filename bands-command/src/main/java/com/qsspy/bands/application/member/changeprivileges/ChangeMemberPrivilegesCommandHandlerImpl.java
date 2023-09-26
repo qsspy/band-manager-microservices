@@ -20,6 +20,7 @@ class ChangeMemberPrivilegesCommandHandlerImpl implements ChangeMemberPrivileges
 
     private final GetBandByIdRepository getRepository;
     private final BandSaveRepository saveRepository;
+    private final DomainEventPublisher publisher;
 
     @Override
     public void handle(final ChangeMemberPrivilegesCommand command) {
@@ -35,5 +36,6 @@ class ChangeMemberPrivilegesCommandHandlerImpl implements ChangeMemberPrivileges
         final var specification = CommandToDomainDtoMapper.toSpecification(privileges);
         band.changeUserPrivileges(specification, memberId);
         saveRepository.save(band);
+        publisher.publishAll(band.flushEvents());
     }
 }

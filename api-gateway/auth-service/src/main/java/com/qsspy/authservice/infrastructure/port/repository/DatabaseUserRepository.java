@@ -5,6 +5,12 @@ import com.qsspy.authservice.application.authorizer.port.output.UserContextRepos
 import com.qsspy.authservice.application.login.port.output.UserLoginRepository;
 import com.qsspy.authservice.application.register.port.input.RegisterCommand;
 import com.qsspy.authservice.application.register.port.output.UserRegisterRepository;
+import com.qsspy.authservice.domain.memberprivileges.BandMemberPrivileges;
+import com.qsspy.authservice.domain.user.User;
+import com.qsspy.authservice.infrastructure.port.adapter.listener.bandcreated.UpdateUserBandAdminRepository;
+import com.qsspy.authservice.infrastructure.port.adapter.listener.bandmemberadded.UpdateUserBandMemberRepository;
+import com.qsspy.authservice.infrastructure.port.adapter.listener.bandmemberprivilegeschanged.BandMemberPrivilegesSaveRepository;
+import com.qsspy.authservice.infrastructure.port.adapter.listener.bandmemberremoved.RemoveUserBandMembershipRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -15,7 +21,7 @@ import java.util.UUID;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-class DatabaseUserRepository implements UserContextRepository, UserLoginRepository, UserRegisterRepository {
+class DatabaseUserRepository implements UserContextRepository, UserLoginRepository, UserRegisterRepository, UpdateUserBandAdminRepository, UpdateUserBandMemberRepository, BandMemberPrivilegesSaveRepository, RemoveUserBandMembershipRepository {
 
     private final JpaUserRepository jpaUserRepository;
     private final JpaUserBandPrivilegesRepository bandPrivilegesRepository;
@@ -52,9 +58,27 @@ class DatabaseUserRepository implements UserContextRepository, UserLoginReposito
     }
 
     @Override
-    public void save(final RegisterCommand command) {
-        jpaUserRepository.save(
-                UserEntityMapper.mapFromCommand(command)
-        );
+    public void save(final User user) {
+        jpaUserRepository.save(user);
+    }
+
+    @Override
+    public void updateBandAdminId(final UUID userId, final UUID bandId) {
+        jpaUserRepository.updateOwnBandIdById(bandId, userId);
+    }
+
+    @Override
+    public void updateBandMemberId(final UUID userId, final UUID bandId) {
+        jpaUserRepository.updateMemberBandIdById(bandId, userId);
+    }
+
+    @Override
+    public void save(BandMemberPrivileges privileges) {
+        bandPrivilegesRepository.save(privileges);
+    }
+
+    @Override
+    public void removeBandMemberId(final UUID userId) {
+        jpaUserRepository.updateMemberBandIdById(null, userId);
     }
 }

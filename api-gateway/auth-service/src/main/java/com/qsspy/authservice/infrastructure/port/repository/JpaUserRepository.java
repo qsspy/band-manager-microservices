@@ -2,6 +2,7 @@ package com.qsspy.authservice.infrastructure.port.repository;
 
 import com.qsspy.authservice.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -35,4 +36,20 @@ interface JpaUserRepository extends JpaRepository<User, UUID> {
     Optional<UUID> findUserIdByEmailAndPassword(final String email, final String password);
 
     boolean existsByEmail(final String email);
+
+    @Modifying
+    @Query("""
+           UPDATE USERS u
+           SET u.ownedBandId = :bandId
+           WHERE u.id = :userId
+           """)
+    void updateOwnBandIdById(final UUID bandId, final UUID userId);
+
+    @Modifying
+    @Query("""
+           UPDATE USERS u
+           SET u.memberBandId = :bandId
+           WHERE u.id = :userId
+           """)
+    void updateMemberBandIdById(final UUID bandId, final UUID userId);
 }

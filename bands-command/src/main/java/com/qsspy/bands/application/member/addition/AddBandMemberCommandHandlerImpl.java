@@ -8,6 +8,7 @@ import com.qsspy.bands.application.member.addition.port.input.AddBandMemberComma
 import com.qsspy.bands.domain.band.Band;
 import com.qsspy.bands.domain.user.User;
 import com.qsspy.commons.architecture.cqrs.CommandValidationException;
+import com.qsspy.commons.port.output.publisher.DomainEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ class AddBandMemberCommandHandlerImpl implements AddBandMemberCommandHandler {
     private final GetBandByIdRepository getRepository;
     private final BandSaveRepository saveRepository;
     private final BandUserGetRepository bandUserGetRepository;
+    private final DomainEventPublisher publisher;
 
     @Override
     public void handle(final AddBandMemberCommand command) {
@@ -47,5 +49,6 @@ class AddBandMemberCommandHandlerImpl implements AddBandMemberCommandHandler {
     private void updateBandMemberAndSave(final Band band, final User userToAdd) {
         band.addMember(userToAdd);
         saveRepository.save(band);
+        publisher.publishAll(band.flushEvents());
     }
 }

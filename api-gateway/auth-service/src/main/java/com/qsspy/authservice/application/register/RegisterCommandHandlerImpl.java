@@ -4,6 +4,7 @@ import com.qsspy.authservice.application.register.port.input.RegisterCommand;
 import com.qsspy.authservice.application.register.port.input.RegisterCommandHandler;
 import com.qsspy.authservice.application.register.port.input.UserAlreadyExistsException;
 import com.qsspy.authservice.application.register.port.output.UserRegisterRepository;
+import com.qsspy.commons.port.output.publisher.DomainEventPublisher;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 class RegisterCommandHandlerImpl implements RegisterCommandHandler {
 
     private final UserRegisterRepository registerRepository;
+    private final DomainEventPublisher domainEventPublisher;
 
     @Override
     public void handle(final RegisterCommand command) {
@@ -23,6 +25,11 @@ class RegisterCommandHandlerImpl implements RegisterCommandHandler {
         if(registerRepository.existsByEmail(command.email())) {
             throw new UserAlreadyExistsException();
         }
-        registerRepository.save(command);
+
+        final var user = UserEntityMapper.mapFromCommand(command);
+        final var event = EventMapper.toEvent(user);
+
+        registerRepository.save(user);
+        domainEventPublisher.publish(event);
     }
 }

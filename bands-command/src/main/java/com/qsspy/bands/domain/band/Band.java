@@ -5,6 +5,8 @@ import com.qsspy.bands.domain.band.dto.MemberPrivilegesChangeSpecification;
 import com.qsspy.bands.domain.user.User;
 import com.qsspy.commons.architecture.ddd.DomainException;
 import com.qsspy.commons.architecture.ddd.DomainValidationException;
+import com.qsspy.commons.messaging.DomainEventHistory;
+import com.qsspy.commons.port.output.publisher.DomainEvent;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -39,6 +41,10 @@ public class Band {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn(name = "BAND_ID", referencedColumnName = "ID")
     private List<BandMemberPrivileges> memberPrivileges;
+
+    @Transient
+    @Builder.Default
+    private DomainEventHistory eventHistory = new DomainEventHistory();
 
     public Band changeDefaultPrivileges(final DefaultPrivilegesChangeSpecification changeSpecification) {
         if(changeSpecification.canAccessCalendar() != null) {
@@ -171,6 +177,8 @@ public class Band {
             }
         }
 
+        final var event = DomainEventFactory.buildBandMemberPrivilegesChangedEvent(member);
+        eventHistory.register(event);
         return this;
     }
 
@@ -185,25 +193,31 @@ public class Band {
 
         final var privilegeId = new BandMemberPrivilegesId(id.getValue(), userToAdd.getId());
         if(memberPrivileges.stream().noneMatch(privilege -> privilege.getId().equals(privilegeId))) {
-            memberPrivileges.add(
-                    BandMemberPrivileges.builder()
-                            .id(privilegeId)
 
-                            .canAccessCalendar(defaultBandPrivileges.getCanAccessCalendar())
-                            .canAddCalendarEntries(defaultBandPrivileges.getCanAddCalendarEntries())
-                            .canEditCalendarEntries(defaultBandPrivileges.getCanEditCalendarEntries())
-                            .canDeleteCalendarEntries(defaultBandPrivileges.getCanDeleteCalendarEntries())
+            final var newMemberPrivileges = BandMemberPrivileges.builder()
+                    .id(privilegeId)
 
-                            .canAccessFinanceHistory(defaultBandPrivileges.getCanAccessFinanceHistory())
-                            .canAddFinanceEntries(defaultBandPrivileges.getCanAddFinanceEntries())
+                    .canAccessCalendar(defaultBandPrivileges.getCanAccessCalendar())
+                    .canAddCalendarEntries(defaultBandPrivileges.getCanAddCalendarEntries())
+                    .canEditCalendarEntries(defaultBandPrivileges.getCanEditCalendarEntries())
+                    .canDeleteCalendarEntries(defaultBandPrivileges.getCanDeleteCalendarEntries())
 
-                            .canSeeFinanceIncomeEntries(defaultBandPrivileges.getCanSeeFinanceIncomeEntries())
-                            .canSeeFinanceOutcomeEntries(defaultBandPrivileges.getCanSeeFinanceOutcomeEntries())
-                            .build()
-            );
+                    .canAccessFinanceHistory(defaultBandPrivileges.getCanAccessFinanceHistory())
+                    .canAddFinanceEntries(defaultBandPrivileges.getCanAddFinanceEntries())
+
+                    .canSeeFinanceIncomeEntries(defaultBandPrivileges.getCanSeeFinanceIncomeEntries())
+                    .canSeeFinanceOutcomeEntries(defaultBandPrivileges.getCanSeeFinanceOutcomeEntries())
+                    .build();
+
+            memberPrivileges.add(newMemberPrivileges);
+            final var memberPrivilegesChangedEvent = DomainEventFactory.buildBandMemberPrivilegesChangedEvent(newMemberPrivileges);
+            eventHistory.register(memberPrivilegesChangedEvent);
         }
 
         userToAdd.setMemberBand(this);
+
+        final var memberAddedEvent = DomainEventFactory.buildBandMemberAddedEvent(userToAdd.getId(), id.getValue());
+        eventHistory.register(memberAddedEvent);
         return this;
     }
 
@@ -222,8 +236,21 @@ public class Band {
                 .ifPresent(user -> {
                     user.setMemberBand(null);
                     bandMembers.remove(user);
+
+                    final var event = DomainEventFactory.buildBandMemberRemovedEvent(userId, id.getValue());
+                    eventHistory.register(event);
                 });
 
+        return this;
+    }
+
+    public List<DomainEvent> flushEvents() {
+        return eventHistory.flush();
+    }
+
+    Band generateBandCreatedEvent() {
+        final var event = DomainEventFactory.buildBandCreatedEvent(adminUser.getId(), id.getValue());
+        eventHistory.register(event);
         return this;
     }
 

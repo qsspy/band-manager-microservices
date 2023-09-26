@@ -5,11 +5,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Embeddable
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter(AccessLevel.PACKAGE)
 class CanEditCalendarEntriesPrivilege implements ValueObject {
 
     @Column(name = "CAN_EDIT_CALENDAR_ENTRIES")

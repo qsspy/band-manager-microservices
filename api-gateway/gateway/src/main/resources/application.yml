@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: api-gateway
   datasource:
     url: jdbc:postgresql://localhost:5432/bm-monolith-db
     username: sa
@@ -8,6 +10,40 @@ spring:
     spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update # TODO remove in future
+  cloud:
+    function:
+      definition:
+        bandCreatedMessageRouter;
+        bandMemberAddedMessageRouter;
+        bandMemberRemovedMessageRouter;
+        bandMemberPrivilegesChangedMessageRouter;
+    stream:
+      function:
+        bindings:
+          bandCreatedMessageRouter-in-0: bm.band.created
+          bandMemberAddedMessageRouter-in-0: bm.band.member.added
+          bandMemberRemovedMessageRouter-in-0: bm.band.member.removed
+          bandMemberPrivilegesChangedMessageRouter-in-0: bm.band.member.privileges.changed
+      default:
+        group: ${spring.application.name}
+        content-type: application/json
+      bindings:
+          user-registered:
+            destination: bm.user.registered
+            producer:
+              partition-key-expression: headers['partitionKey']
+          band-created:
+            destination: bm.band.created
+          band-member-added:
+            destination: bm.band.member.added
+          band-member-removed:
+            destination: bm.band.member.removed
+          band-member-privileges-changed:
+            destination: bm.band.member.privileges.changed
+      kafka:
+        binder:
+          auto-create-topics: true #TODO remove for manual topic creation
+          brokers: kafka1:9091,kafka2:9092,kafka3:9093
 jwt:
   secret: OGil2Ll4pvD7Pfg/7hbe3r2Q7SYfbpKt2Neulyp4NUxRb5kCDYPJpgbJ/9U2Q9i7
   expiration:

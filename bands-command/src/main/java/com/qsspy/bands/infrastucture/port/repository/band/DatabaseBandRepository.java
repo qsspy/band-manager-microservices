@@ -1,7 +1,6 @@
-package com.qsspy.bands.infrastucture.port.repository;
+package com.qsspy.bands.infrastucture.port.repository.band;
 
 import com.qsspy.bands.application.common.port.output.BandSaveRepository;
-import com.qsspy.bands.application.common.port.output.BandUserGetRepository;
 import com.qsspy.bands.application.common.port.output.GetBandByIdRepository;
 import com.qsspy.bands.domain.band.Band;
 import lombok.RequiredArgsConstructor;

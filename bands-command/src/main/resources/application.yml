@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: api-gateway
   datasource:
     url: jdbc:postgresql://localhost:5432/bm-monolith-db
     username: sa
@@ -8,5 +10,39 @@ spring:
     spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update # TODO remove in future
+  cloud:
+    function:
+      definition:
+        userRegisteredEventRouter
+    stream:
+      function:
+        bindings:
+          userRegisteredEventRouter-in-0: user-registered
+      default:
+        group: ${spring.application.name}
+        content-type: application/json
+      bindings:
+        user-registered:
+          destination: bm.user.registered
+        band-created:
+          destination: bm.band.created
+          producer:
+            partition-key-expression: headers['partitionKey']
+        band-member-added:
+          destination: bm.band.member.added
+          producer:
+            partition-key-expression: headers['partitionKey']
+        band-member-removed:
+          destination: bm.band.member.removed
+          producer:
+            partition-key-expression: headers['partitionKey']
+        band-member-privileges-changed:
+          destination: bm.band.member.privileges.changed
+          producer:
+            partition-key-expression: headers['partitionKey']
+      kafka:
+        binder:
+          auto-create-topics: true #TODO remove for manual topic creation
+          brokers: kafka1:9091,kafka2:9092,kafka3:9093
 server:
   port: 8081

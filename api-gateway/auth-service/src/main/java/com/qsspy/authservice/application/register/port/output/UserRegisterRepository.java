@@ -1,6 +1,7 @@
 package com.qsspy.authservice.application.register.port.output;
 
 import com.qsspy.authservice.application.register.port.input.RegisterCommand;
+import com.qsspy.authservice.domain.user.User;
 
 public interface UserRegisterRepository {
 
@@ -13,9 +14,9 @@ public interface UserRegisterRepository {
     boolean existsByEmail(final String email);
 
     /**
-     * Saves the new user in the repository using data provided in command
+     * Saves the new user in the repository
      *
-     * @param command command containing user data
+     * @param user user to be saved
      */
-    void save(final RegisterCommand command);
+    void save(final User user);
 }

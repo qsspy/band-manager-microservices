@@ -1,5 +1,6 @@
 package com.qsspy.gateway;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.web.embedded.tomcat.TomcatProtocolHandlerCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.core.task.support.TaskExecutorAdapter;
 import java.util.concurrent.Executors;
 
 @Configuration
+@Slf4j
 class TomcatConfiguration {
 
     @Bean(TaskExecutionAutoConfiguration.APPLICATION_TASK_EXECUTOR_BEAN_NAME)
@@ -19,6 +21,8 @@ class TomcatConfiguration {
 
     @Bean
     public TomcatProtocolHandlerCustomizer<?> protocolHandlerVirtualThreadExecutorCustomizer() {
+        log.info("Configuring tomcat with virtual threads...");
+
         return protocolHandler -> {
             protocolHandler.setExecutor(Executors.newVirtualThreadPerTaskExecutor());
         };

@@ -1,9 +1,8 @@
-package com.qsspy.bands.infrastucture.port.repository;
+package com.qsspy.bands.infrastucture.port.repository.user;
 
-import com.qsspy.bands.application.common.port.output.BandSaveRepository;
 import com.qsspy.bands.application.common.port.output.BandUserGetRepository;
-import com.qsspy.bands.application.common.port.output.GetBandByIdRepository;
 import com.qsspy.bands.domain.user.User;
+import com.qsspy.bands.infrastucture.adapter.listener.userregistered.UserSaveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-class DatabaseBandUserRepository implements BandUserGetRepository {
+class DatabaseBandUserRepository implements BandUserGetRepository, UserSaveRepository {
 
     private final JpaBandUserRepository userRepository;
 
@@ -24,5 +23,10 @@ class DatabaseBandUserRepository implements BandUserGetRepository {
     @Override
     public Optional<User> findByEmail(final String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public void save(final User user) {
+        userRepository.save(user);
     }
 }
