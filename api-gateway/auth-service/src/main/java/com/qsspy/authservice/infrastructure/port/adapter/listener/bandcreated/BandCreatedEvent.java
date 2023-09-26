@@ -1,7 +1,5 @@
 package com.qsspy.authservice.infrastructure.port.adapter.listener.bandcreated;
 
-import com.qsspy.commons.port.output.publisher.DomainEvent;
-
 import java.util.UUID;
 
 record BandCreatedEvent(

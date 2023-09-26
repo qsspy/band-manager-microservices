@@ -1,8 +1,5 @@
 package com.qsspy.bands.infrastucture.adapter.listener.userregistered;
 
-import com.qsspy.commons.port.output.publisher.DomainEvent;
-import lombok.Builder;
-
 import java.util.UUID;
 
 record UserRegisteredEvent(

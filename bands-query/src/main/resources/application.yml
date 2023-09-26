@@ -13,12 +13,25 @@ spring:
     password: cassandra
     port: 9042
   application:
-    name: api-gateway
+    name: bands-query
   cloud:
+    function:
+      definition:
+        bandMemberAddedMessageRouter;
+        bandMemberRemovedMessageRouter;
     stream:
+      function:
+        bindings:
+          bandMemberAddedMessageRouter-in-0: bm.band.member.added
+          bandMemberRemovedMessageRouter-in-0: bm.band.member.removed
       default:
         group: ${spring.application.name}
         content-type: application/json
+      bindings:
+        band-member-added:
+          destination: bm.band.member.added
+        band-member-removed:
+          destination: bm.band.member.removed
       kafka:
         binder:
           auto-create-topics: true #TODO remove for manual topic creation

@@ -16,6 +16,8 @@ class UserRegisteredEventProcessor {
         final var user = User.builder()
                 .id(event.userId())
                 .email(event.email())
+                .firstName(event.firstName())
+                .lastName(event.lastName())
                 .build();
 
         saveRepository.save(user);

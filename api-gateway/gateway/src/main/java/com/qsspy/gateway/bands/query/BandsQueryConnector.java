@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@FeignClient(name = "bands-command", url = "${clients.bands-query.url}")
+@FeignClient(name = "bands-query", url = "${clients.bands-query.url}")
 interface BandsQueryConnector {
 
     @GetMapping("/api/v1/bands/{bandId}/members")

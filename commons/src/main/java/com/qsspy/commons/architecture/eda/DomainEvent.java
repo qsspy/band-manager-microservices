@@ -1,4 +1,4 @@
-package com.qsspy.commons.port.output.publisher;
+package com.qsspy.commons.architecture.eda;
 
 import java.util.UUID;
 

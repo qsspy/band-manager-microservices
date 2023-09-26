@@ -1,6 +1,6 @@
 package com.qsspy.bands.domain.band;
 
-import com.qsspy.commons.port.output.publisher.DomainEvent;
+import com.qsspy.commons.architecture.eda.DomainEvent;
 import lombok.Builder;
 
 import java.util.UUID;
@@ -11,6 +11,9 @@ record BandMemberAddedEvent(
         long occurredOn,
 
         UUID memberId,
+        String memberEmail,
+        String memberFirstName,
+        String memberLastName,
         UUID bandId
 ) implements DomainEvent {
 

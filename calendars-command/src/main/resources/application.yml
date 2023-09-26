@@ -1,6 +1,6 @@
 spring:
   application:
-    name: api-gateway
+    name: calendars-command
   datasource:
     url: jdbc:postgresql://postgres-db:5432/calendars-command-db
     username: sa

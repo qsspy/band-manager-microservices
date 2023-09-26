@@ -1,6 +1,5 @@
 package com.qsspy.authservice.infrastructure.port.adapter.listener.bandmemberadded;
 
-import com.qsspy.commons.port.output.publisher.DomainEvent;
 import lombok.Builder;
 
 import java.util.UUID;

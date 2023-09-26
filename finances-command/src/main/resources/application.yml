@@ -1,6 +1,6 @@
 spring:
   application:
-    name: api-gateway
+    name: finances-command
   datasource:
     url: jdbc:postgresql://postgres-db:5432/finances-command-db
     username: sa

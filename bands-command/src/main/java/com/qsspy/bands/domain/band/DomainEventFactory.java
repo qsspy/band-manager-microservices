@@ -1,5 +1,6 @@
 package com.qsspy.bands.domain.band;
 
+import com.qsspy.bands.domain.user.User;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -19,22 +20,26 @@ final class DomainEventFactory {
                 .build();
     }
 
-    static BandMemberAddedEvent buildBandMemberAddedEvent(final UUID memberId, final UUID bandId) {
+    static BandMemberAddedEvent buildBandMemberAddedEvent(final User user, final UUID bandId) {
         return BandMemberAddedEvent.builder()
                 .eventId(UUID.randomUUID())
                 .occurredOn(now())
 
-                .memberId(memberId)
+                .memberId(user.getId())
+                .memberEmail(user.getEmail())
+                .memberFirstName(user.getFirstName())
+                .memberLastName(user.getLastName())
                 .bandId(bandId)
                 .build();
     }
 
-    static BandMemberRemovedEvent buildBandMemberRemovedEvent(final UUID memberId, final UUID bandId) {
+    static BandMemberRemovedEvent buildBandMemberRemovedEvent(final UUID memberId, final String memberEmail, final UUID bandId) {
         return BandMemberRemovedEvent.builder()
                 .eventId(UUID.randomUUID())
                 .occurredOn(now())
 
                 .memberId(memberId)
+                .memberEmail(memberEmail)
                 .bandId(bandId)
                 .build();
     }

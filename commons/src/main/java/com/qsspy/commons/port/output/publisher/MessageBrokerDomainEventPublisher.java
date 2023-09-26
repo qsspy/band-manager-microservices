@@ -1,5 +1,6 @@
 package com.qsspy.commons.port.output.publisher;
 
+import com.qsspy.commons.architecture.eda.DomainEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;

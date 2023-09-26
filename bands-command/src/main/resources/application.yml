@@ -1,6 +1,6 @@
 spring:
   application:
-    name: api-gateway
+    name: bands-command
   datasource:
     url: jdbc:postgresql://postgres-db:5432/bands-command-db
     username: sa

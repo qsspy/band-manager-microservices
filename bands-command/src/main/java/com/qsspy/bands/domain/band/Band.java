@@ -6,7 +6,7 @@ import com.qsspy.bands.domain.user.User;
 import com.qsspy.commons.architecture.ddd.DomainException;
 import com.qsspy.commons.architecture.ddd.DomainValidationException;
 import com.qsspy.commons.messaging.DomainEventHistory;
-import com.qsspy.commons.port.output.publisher.DomainEvent;
+import com.qsspy.commons.architecture.eda.DomainEvent;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -216,7 +216,7 @@ public class Band {
 
         userToAdd.setMemberBand(this);
 
-        final var memberAddedEvent = DomainEventFactory.buildBandMemberAddedEvent(userToAdd.getId(), id.getValue());
+        final var memberAddedEvent = DomainEventFactory.buildBandMemberAddedEvent(userToAdd, id.getValue());
         eventHistory.register(memberAddedEvent);
         return this;
     }
@@ -237,7 +237,7 @@ public class Band {
                     user.setMemberBand(null);
                     bandMembers.remove(user);
 
-                    final var event = DomainEventFactory.buildBandMemberRemovedEvent(userId, id.getValue());
+                    final var event = DomainEventFactory.buildBandMemberRemovedEvent(userId, user.getEmail(), id.getValue());
                     eventHistory.register(event);
                 });
 

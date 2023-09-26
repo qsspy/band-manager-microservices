@@ -20,6 +20,12 @@ public class User {
     @Column(name = "EMAIL")
     private String email;
 
+    @Column(name = "FIRST_NAME")
+    private String firstName;
+
+    @Column(name = "LAST_NAME")
+    private String lastName;
+
     @OneToOne(mappedBy = "adminUser", fetch = FetchType.LAZY)
     private Band ownedBand;
 

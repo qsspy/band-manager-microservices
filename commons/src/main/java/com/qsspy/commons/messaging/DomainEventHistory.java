@@ -1,6 +1,6 @@
 package com.qsspy.commons.messaging;
 
-import com.qsspy.commons.port.output.publisher.DomainEvent;
+import com.qsspy.commons.architecture.eda.DomainEvent;
 
 import java.util.LinkedList;
 import java.util.List;

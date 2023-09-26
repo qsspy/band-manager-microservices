@@ -1,5 +1,7 @@
 package com.qsspy.commons.port.output.publisher;
 
+import com.qsspy.commons.architecture.eda.DomainEvent;
+
 import java.util.Collection;
 
 public interface DomainEventPublisher {

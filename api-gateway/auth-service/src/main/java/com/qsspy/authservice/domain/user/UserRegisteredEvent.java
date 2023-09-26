@@ -1,6 +1,6 @@
 package com.qsspy.authservice.domain.user;
 
-import com.qsspy.commons.port.output.publisher.DomainEvent;
+import com.qsspy.commons.architecture.eda.DomainEvent;
 import lombok.Builder;
 
 import java.util.UUID;

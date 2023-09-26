@@ -1,6 +1,6 @@
 package com.qsspy.bands.domain.band;
 
-import com.qsspy.commons.port.output.publisher.DomainEvent;
+import com.qsspy.commons.architecture.eda.DomainEvent;
 import lombok.Builder;
 
 import java.util.UUID;
@@ -11,7 +11,8 @@ record BandMemberRemovedEvent(
         long occurredOn,
 
         UUID memberId,
-        UUID bandId
+        UUID bandId,
+        String memberEmail
 ) implements DomainEvent {
 
     static final String EVENT_TYPE = "band.member.removed";
