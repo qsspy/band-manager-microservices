@@ -20,3 +20,10 @@ spring:
       kafka:
         binder:
           brokers: localhost:9091,localhost:9092,localhost:9093
+clients:
+  bands-command:
+    url: localhost:8081
+  finances-command:
+    url: localhost:8082
+  calendars-command:
+    url: localhost:8083

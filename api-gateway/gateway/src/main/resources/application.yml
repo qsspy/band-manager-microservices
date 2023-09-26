@@ -48,12 +48,10 @@ jwt:
   secret: OGil2Ll4pvD7Pfg/7hbe3r2Q7SYfbpKt2Neulyp4NUxRb5kCDYPJpgbJ/9U2Q9i7
   expiration:
     minutes: 60
-server:
-  port: 8080
 clients:
   bands-command:
-    url: localhost:8081
+    url: bands-command:8080
   finances-command:
-    url: localhost:8082
+    url: finances-command:8080
   calendars-command:
-    url: localhost:8083
+    url: calendars-command:8080
