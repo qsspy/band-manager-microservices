@@ -1,0 +1,13 @@
+spring:
+  cassandra:
+    contact-points: 127.0.0.1
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9091,localhost:9092,localhost:9093
+server:
+  port: 8084
+logging:
+  level:
+    org.springframework.data.cassandra.core.cql.CqlTemplate: DEBUG

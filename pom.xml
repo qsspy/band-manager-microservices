@@ -16,7 +16,6 @@
 	<description>Monolithic version of band manager</description>
 	<modules>
 		<module>boot</module>
-		<module>bands</module>
 		<module>commons</module>
         <module>finances</module>
         <module>calendars</module>
@@ -25,7 +24,8 @@
 		<module>bands-command</module>
         <module>finances-command</module>
 		<module>calendars-command</module>
-	</modules>
+        <module>bands-query</module>
+    </modules>
 
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>

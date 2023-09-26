@@ -27,3 +27,5 @@ clients:
     url: localhost:8082
   calendars-command:
     url: localhost:8083
+  bands-query:
+    url: localhost:8084
