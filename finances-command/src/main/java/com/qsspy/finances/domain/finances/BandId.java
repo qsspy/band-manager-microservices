@@ -4,15 +4,15 @@ import com.qsspy.commons.architecture.ddd.DomainValidationException;
 import com.qsspy.commons.architecture.ddd.ValueObject;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
 @Embeddable
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode
+@Getter(AccessLevel.PACKAGE)
 class BandId implements ValueObject {
 
     @Column(name = "BAND_ID")

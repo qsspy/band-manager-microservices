@@ -1,6 +1,7 @@
 package com.qsspy.authservice.domain.user;
 
 import com.qsspy.commons.architecture.eda.DomainEvent;
+import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.Builder;
 
 import java.util.UUID;
@@ -15,7 +16,7 @@ public record UserRegisteredEvent(
         String firstName,
         String lastName
 
-) implements DomainEvent {
+) implements NotificationEvent {
 
     private static final String EVENT_TYPE = "user.registered";
     private static final int EVENT_VERSION = 1;

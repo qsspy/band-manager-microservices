@@ -1,5 +1,6 @@
 package com.qsspy.finances.application.addition;
 
+import com.qsspy.commons.port.output.publisher.domain.DomainEventPublisher;
 import com.qsspy.finances.application.addition.port.input.AddFinanceEntryCommand;
 import com.qsspy.finances.application.addition.port.input.AddFinanceEntryCommandHandler;
 import com.qsspy.finances.application.addition.port.output.FinanceEntrySaveRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 class AddFinanceEntryCommandHandlerImpl implements AddFinanceEntryCommandHandler {
 
     private final FinanceEntrySaveRepository repository;
+    private final DomainEventPublisher publisher;
 
     @Override
     public void handle(final AddFinanceEntryCommand command) {
@@ -26,5 +28,6 @@ class AddFinanceEntryCommandHandlerImpl implements AddFinanceEntryCommandHandler
         final var specification = CommandToDtoMapper.toSpecification(command);
         final var entry = FinanceEntryFactory.createNewFinanceEntry(specification);
         repository.save(entry);
+        publisher.publishAll(entry.flushEvents());
     }
 }

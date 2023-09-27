@@ -5,7 +5,7 @@ import com.qsspy.bands.application.common.port.output.GetBandByIdRepository;
 import com.qsspy.bands.application.member.removal.port.input.RemoveBandMemberCommand;
 import com.qsspy.bands.application.member.removal.port.input.RemoveBandMemberCommandHandler;
 import com.qsspy.bands.domain.band.Band;
-import com.qsspy.commons.port.output.publisher.DomainEventPublisher;
+import com.qsspy.commons.port.output.publisher.domain.DomainEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

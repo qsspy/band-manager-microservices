@@ -4,13 +4,13 @@ import com.qsspy.commons.architecture.ddd.DomainValidationException;
 import com.qsspy.commons.architecture.ddd.ValueObject;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Embeddable
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode
+@Getter(AccessLevel.PACKAGE)
 class Initiator implements ValueObject {
 
     @Column(name = "INITIATOR_EMAIL")

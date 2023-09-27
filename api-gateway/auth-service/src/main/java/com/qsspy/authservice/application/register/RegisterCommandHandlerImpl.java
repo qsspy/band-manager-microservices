@@ -4,8 +4,8 @@ import com.qsspy.authservice.application.register.port.input.RegisterCommand;
 import com.qsspy.authservice.application.register.port.input.RegisterCommandHandler;
 import com.qsspy.authservice.application.register.port.input.UserAlreadyExistsException;
 import com.qsspy.authservice.application.register.port.output.UserRegisterRepository;
-import com.qsspy.commons.port.output.publisher.DomainEventPublisher;
-import jakarta.annotation.PostConstruct;
+import com.qsspy.commons.port.output.publisher.domain.DomainEventPublisher;
+import com.qsspy.commons.port.output.publisher.notification.NotificationEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 class RegisterCommandHandlerImpl implements RegisterCommandHandler {
 
     private final UserRegisterRepository registerRepository;
-    private final DomainEventPublisher domainEventPublisher;
+    private final NotificationEventPublisher notificationEventPublisher;
 
     @Override
     public void handle(final RegisterCommand command) {
@@ -30,6 +30,6 @@ class RegisterCommandHandlerImpl implements RegisterCommandHandler {
         final var event = EventMapper.toEvent(user);
 
         registerRepository.save(user);
-        domainEventPublisher.publish(event);
+        notificationEventPublisher.publish(event);
     }
 }

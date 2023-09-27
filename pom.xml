@@ -17,7 +17,6 @@
 	<modules>
 		<module>boot</module>
 		<module>commons</module>
-        <module>finances</module>
         <module>calendars</module>
         <module>domain-core</module>
 		<module>api-gateway</module>
@@ -25,6 +24,7 @@
         <module>finances-command</module>
 		<module>calendars-command</module>
         <module>bands-query</module>
+        <module>finances-query</module>
     </modules>
 
 	<properties>

@@ -5,8 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(
 		scanBasePackages = {
-				"com.qsspy.bands",
-				"com.qsspy.commons.port.output.publisher"
+				"com.qsspy.bands"
 		}
 )
 public class BandsQueryApplication {

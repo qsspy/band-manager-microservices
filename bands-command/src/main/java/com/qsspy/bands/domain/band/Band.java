@@ -195,30 +195,35 @@ public class Band {
         }
 
         final var privilegeId = new BandMemberPrivilegesId(id.getValue(), userToAdd.getId());
-        if(memberPrivileges.stream().noneMatch(privilege -> privilege.getId().equals(privilegeId))) {
 
-            final var newMemberPrivileges = BandMemberPrivileges.builder()
-                    .id(privilegeId)
+        final var resolvedMemberPrivileges = memberPrivileges.stream()
+                .filter(privilege -> privilege.getId().equals(privilegeId))
+                .findFirst()
+                .orElseGet(() -> {
+                    final var newMemberPrivileges = BandMemberPrivileges.builder()
+                            .id(privilegeId)
 
-                    .canAccessCalendar(defaultBandPrivileges.getCanAccessCalendar())
-                    .canAddCalendarEntries(defaultBandPrivileges.getCanAddCalendarEntries())
-                    .canEditCalendarEntries(defaultBandPrivileges.getCanEditCalendarEntries())
-                    .canDeleteCalendarEntries(defaultBandPrivileges.getCanDeleteCalendarEntries())
+                            .canAccessCalendar(defaultBandPrivileges.getCanAccessCalendar())
+                            .canAddCalendarEntries(defaultBandPrivileges.getCanAddCalendarEntries())
+                            .canEditCalendarEntries(defaultBandPrivileges.getCanEditCalendarEntries())
+                            .canDeleteCalendarEntries(defaultBandPrivileges.getCanDeleteCalendarEntries())
 
-                    .canAccessFinanceHistory(defaultBandPrivileges.getCanAccessFinanceHistory())
-                    .canAddFinanceEntries(defaultBandPrivileges.getCanAddFinanceEntries())
+                            .canAccessFinanceHistory(defaultBandPrivileges.getCanAccessFinanceHistory())
+                            .canAddFinanceEntries(defaultBandPrivileges.getCanAddFinanceEntries())
 
-                    .canSeeFinanceIncomeEntries(defaultBandPrivileges.getCanSeeFinanceIncomeEntries())
-                    .canSeeFinanceOutcomeEntries(defaultBandPrivileges.getCanSeeFinanceOutcomeEntries())
-                    .build();
+                            .canSeeFinanceIncomeEntries(defaultBandPrivileges.getCanSeeFinanceIncomeEntries())
+                            .canSeeFinanceOutcomeEntries(defaultBandPrivileges.getCanSeeFinanceOutcomeEntries())
+                            .build();
 
-            memberPrivileges.add(newMemberPrivileges);
-            final var memberPrivilegesChangedEvent = DomainEventFactory.buildBandMemberPrivilegesChangedEvent(newMemberPrivileges);
-            eventHistory.register(memberPrivilegesChangedEvent);
-        }
+                    memberPrivileges.add(newMemberPrivileges);
+
+                    return newMemberPrivileges;
+                });
 
         userToAdd.setMemberBand(this);
 
+        final var memberPrivilegesChangedEvent = DomainEventFactory.buildBandMemberPrivilegesChangedEvent(resolvedMemberPrivileges);
+        eventHistory.register(memberPrivilegesChangedEvent);
         final var memberAddedEvent = DomainEventFactory.buildBandMemberAddedEvent(userToAdd, id.getValue());
         eventHistory.register(memberAddedEvent);
         return this;

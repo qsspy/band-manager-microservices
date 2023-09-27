@@ -29,3 +29,5 @@ clients:
     url: localhost:8083
   bands-query:
     url: localhost:8084
+  finances-query:
+    url: localhost:8085

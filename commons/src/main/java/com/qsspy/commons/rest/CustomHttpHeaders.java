@@ -7,5 +7,6 @@ import lombok.NoArgsConstructor;
 public final class CustomHttpHeaders {
 
     public static final String USER_ID = "User-Id";
+    public static final String IS_ADMIN = "Is-Admin";
     public static final String INITIATOR_BAND_ID = "Initiator-Band-Id";
 }

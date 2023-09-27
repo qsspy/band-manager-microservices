@@ -4,6 +4,7 @@ import com.qsspy.finances.domain.finances.dto.FinanceEntrySpecification;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -17,8 +18,10 @@ public final class FinanceEntryFactory {
                 .description(spec.description() != null ? new Description(spec.description()) : null)
                 .amount(new Amount(spec.amount()))
                 .initiator(new Initiator(spec.initiatorEmail()))
+                .creationDate(new CreationDate(LocalDateTime.now()))
                 .isOutcome(spec.isOutcome())
-                .build();
+                .build()
+                .generateInitialEvents();
 
         entry.validateCurrentState();
 

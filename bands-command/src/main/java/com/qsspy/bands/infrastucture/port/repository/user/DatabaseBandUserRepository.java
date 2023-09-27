@@ -2,7 +2,7 @@ package com.qsspy.bands.infrastucture.port.repository.user;
 
 import com.qsspy.bands.application.common.port.output.BandUserGetRepository;
 import com.qsspy.bands.domain.user.User;
-import com.qsspy.bands.infrastucture.adapter.listener.userregistered.UserSaveRepository;
+import com.qsspy.bands.infrastucture.adapter.listener.notification.userregistered.UserSaveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -6,7 +6,7 @@ import com.qsspy.bands.application.common.port.output.BandSaveRepository;
 import com.qsspy.bands.application.common.port.output.BandUserGetRepository;
 import com.qsspy.bands.domain.band.BandFactory;
 import com.qsspy.bands.domain.band.dto.BandCreationData;
-import com.qsspy.commons.port.output.publisher.DomainEventPublisher;
+import com.qsspy.commons.port.output.publisher.domain.DomainEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
