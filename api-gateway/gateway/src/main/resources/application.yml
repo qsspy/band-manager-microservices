@@ -59,3 +59,5 @@ clients:
     url: bands-query:8080
   finances-query:
     url: finances-query:8080
+  calendars-query:
+    url: calendars-query:8080

@@ -16,14 +16,14 @@
 	<description>Monolithic version of band manager</description>
 	<modules>
 		<module>commons</module>
-        <module>calendars</module>
 		<module>api-gateway</module>
 		<module>bands-command</module>
         <module>finances-command</module>
 		<module>calendars-command</module>
         <module>bands-query</module>
         <module>finances-query</module>
-    </modules>
+		<module>calendars-query</module>
+	</modules>
 
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>

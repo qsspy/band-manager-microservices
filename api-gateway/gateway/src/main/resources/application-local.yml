@@ -31,3 +31,5 @@ clients:
     url: localhost:8084
   finances-query:
     url: localhost:8085
+  calendars-query:
+    url: localhost:8086

@@ -1,0 +1,24 @@
+spring:
+  cassandra:
+    contact-points: cassandra1:9042, cassandra2:9042, cassandra3:9042
+    keyspace-name: calendar
+    schema-action: create_if_not_exists
+    request:
+      timeout: 10s
+    connection:
+      connect-timeout: 10s
+      init-query-timeout: 10s
+    local-datacenter: datacenter1
+    username: cassandra
+    password: cassandra
+    port: 9042
+  application:
+    name: calendars-query
+  cloud:
+      default:
+        group: ${spring.application.name}
+        content-type: application/json
+      kafka:
+        binder:
+          auto-create-topics: true #TODO remove for manual topic creation
+          brokers: kafka1:9091,kafka2:9092,kafka3:9093
