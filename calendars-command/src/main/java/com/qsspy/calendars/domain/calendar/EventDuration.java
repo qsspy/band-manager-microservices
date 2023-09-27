@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.Duration;
@@ -13,6 +14,7 @@ import java.time.Duration;
 @Embeddable
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter(AccessLevel.PACKAGE)
 class EventDuration implements ValueObject {
 
     @Column(name = "EVENT_DURATION")

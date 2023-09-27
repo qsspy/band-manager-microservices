@@ -5,6 +5,7 @@ import com.qsspy.calendars.application.entry.common.port.output.CalendarEntryGet
 import com.qsspy.calendars.application.entry.restriction.port.input.RestrictMemberPrivilegesForEntryCommand;
 import com.qsspy.calendars.application.entry.restriction.port.input.RestrictMemberPrivilegesForEntryCommandHandler;
 import com.qsspy.calendars.domain.calendar.CalendarEntry;
+import com.qsspy.commons.port.output.publisher.domain.DomainEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ class RestrictMemberPrivilegesForEntryCommandHandlerImpl implements RestrictMemb
 
     private final CalendarEntryGetRepository getRepository;
     private final CalendarEntrySaveRepository saveRepository;
+    private final DomainEventPublisher publisher;
 
     @Override
     public void handle(final RestrictMemberPrivilegesForEntryCommand command) {
@@ -37,5 +39,6 @@ class RestrictMemberPrivilegesForEntryCommandHandlerImpl implements RestrictMemb
         final var editData = CommandToDtoMapper.toDomainData(command);
         entry.editMemberEntryPrivileges(editData);
         saveRepository.save(entry);
+        publisher.publishAll(entry.flushEvents());
     }
 }

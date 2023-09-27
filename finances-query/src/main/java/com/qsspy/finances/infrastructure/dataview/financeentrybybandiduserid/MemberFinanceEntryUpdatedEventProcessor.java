@@ -28,6 +28,7 @@ class MemberFinanceEntryUpdatedEventProcessor implements DataPropagationEventPro
                 )
                 .isVisible(event.isVisible())
                 .amount(event.amount())
+                .initiatorEmail(event.initiatorEmail())
                 .description(event.description())
                 .isOutcome(event.isOutcome())
                 .isVisible(event.isVisible())

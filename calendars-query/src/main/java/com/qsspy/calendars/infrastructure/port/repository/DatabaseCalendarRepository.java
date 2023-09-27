@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-class DatabaseCalendarRepository implements CalendarEntryMemberRestrictionRepository, CalendarEntryDetailsGetRepository, CalendarEntryListRepository {
+class DatabaseCalendarRepository implements CalendarEntryDetailsGetRepository, CalendarEntryListRepository {
 
     @Override
     public Optional<CalendarEntryDetailsDTO> getFinanceEntryDetails(UUID bandId, UUID memberId, UUID entryId) {
@@ -24,11 +24,6 @@ class DatabaseCalendarRepository implements CalendarEntryMemberRestrictionReposi
 
     @Override
     public List<CalendarEntryDTO> getCalendarEntries(UUID bandId, UUID memberId) {
-        return null;
-    }
-
-    @Override
-    public List<CalendarEntryMemberRestrictionDTO> getMemberRestrictions(UUID bandId) {
         return null;
     }
 }

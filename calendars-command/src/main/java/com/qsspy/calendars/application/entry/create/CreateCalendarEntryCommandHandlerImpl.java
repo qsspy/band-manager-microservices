@@ -4,6 +4,7 @@ import com.qsspy.calendars.application.entry.common.port.output.CalendarEntrySav
 import com.qsspy.calendars.application.entry.create.port.input.CreateCalendarEntryCommand;
 import com.qsspy.calendars.application.entry.create.port.input.CreateCalendarEntryCommandHandler;
 import com.qsspy.calendars.domain.calendar.CalendarEntryFactory;
+import com.qsspy.commons.port.output.publisher.domain.DomainEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 class CreateCalendarEntryCommandHandlerImpl implements CreateCalendarEntryCommandHandler {
 
     private final CalendarEntrySaveRepository saveRepository;
+    private final DomainEventPublisher publisher;
 
     @Override
     public void handle(final CreateCalendarEntryCommand command) {
@@ -26,5 +28,6 @@ class CreateCalendarEntryCommandHandlerImpl implements CreateCalendarEntryComman
         final var specification = CommandToDtoMapper.toSpecification(command);
         final var entry = CalendarEntryFactory.createNewCalendarEntry(specification);
         saveRepository.save(entry);
+        publisher.publishAll(entry.flushEvents());
     }
 }

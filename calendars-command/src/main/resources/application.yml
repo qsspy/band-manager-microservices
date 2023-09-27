@@ -11,10 +11,32 @@ spring:
     hibernate:
       ddl-auto: update # TODO remove in future
   cloud:
+    function:
+      definition:
+        bandMemberAddedMessageRouter;
+        bandMemberRemovedMessageRouter;
     stream:
+      function:
+        bindings:
+          bandMemberAddedMessageRouter-in-0: band-member-added
+          bandMemberRemovedMessageRouter-in-0: band-member-removed
       default:
         group: ${spring.application.name}
         content-type: application/json
+      bindings:
+        band-member-added:
+          destination: bm.band.member.added
+        band-member-removed:
+          destination: bm.band.member.removed
+        calendar-entry-member-empty-restriction-created:
+          destination: bm.calendar.entry.member.empty.restriction.created
+          producer:
+            partition-key-expression: headers['partitionKey']
+        calendar-entry-member-restriction-changed:
+          destination: bm.calendar.entry.member.restriction.changed
+          producer:
+            partition-key-expression: headers['partitionKey']
+
       kafka:
         binder:
           auto-create-topics: true #TODO remove for manual topic creation

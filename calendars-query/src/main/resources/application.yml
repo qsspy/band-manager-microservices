@@ -15,9 +15,29 @@ spring:
   application:
     name: calendars-query
   cloud:
+    function:
+      definition:
+        bandMemberRemovedMessageRouter;
+        calendarEntryMemberEmptyRestrictionCreatedMessageRouter;
+        calendarEntryMemberRestrictionChangedMessageRouter;
+    stream:
+      function:
+        bindings:
+          bandMemberRemovedMessageRouter-in-0: band-member-removed
+          calendarEntryMemberEmptyRestrictionCreatedMessageRouter-in-0: calendar-entry-member-empty-restriction-created
+          calendarEntryMemberRestrictionChangedMessageRouter-in-0: calendar-entry-member-restriction-changed
       default:
         group: ${spring.application.name}
         content-type: application/json
+      bindings:
+        band-member-removed:
+          destination: bm.band.member.removed
+        calendar-entry-member-empty-restriction-created:
+          destination: bm.calendar.entry.member.empty.restriction.created
+          consumer:
+            batch-mode: true
+        calendar-entry-member-restriction-changed:
+          destination: bm.calendar.entry.member.restriction.changed
       kafka:
         binder:
           auto-create-topics: true #TODO remove for manual topic creation

@@ -4,11 +4,10 @@ import com.qsspy.calendars.domain.calendar.dto.EditCalendarEntryData;
 import com.qsspy.calendars.domain.calendar.dto.RestrictedMemberPrivilegesData;
 import com.qsspy.commons.architecture.ddd.AggregateRoot;
 import com.qsspy.commons.architecture.ddd.DomainValidationException;
+import com.qsspy.commons.architecture.eda.DomainEvent;
+import com.qsspy.commons.messaging.DomainEventHistory;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
@@ -17,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity(name = "CALENDAR_ENTRIES")
+@Getter(AccessLevel.PACKAGE)
 public class CalendarEntry implements AggregateRoot {
     @EmbeddedId
     private AggregateId id;
@@ -46,6 +46,10 @@ public class CalendarEntry implements AggregateRoot {
     @Embedded
     private Description description;
 
+    @Transient
+    @Builder.Default
+    private DomainEventHistory eventHistory = new DomainEventHistory();
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "ENTRY_ID", referencedColumnName = "ID")
     private List<RestrictedCalendarViewerPrivileges> restrictedViewerPrivileges;
@@ -73,20 +77,36 @@ public class CalendarEntry implements AggregateRoot {
                             viewer.changeCanSeeCalendarEntryPrivilege(data.canSeeCalendarEntry());
                             viewer.changeCanSeeCalendarEntryPaymentPrivilege(data.canSeeCalendarEntryPayment());
                             viewer.changeCanSeeCalendarEntryDetailsPrivilege(data.canSeeCalendarEntryDetails());
+
+                            final var event = DomainEventFactory.buildCalendarEntryRestrictionForMemberChangedEvent(viewer, this);
+                            eventHistory.register(event);
                         },
                         () -> {
-                            restrictedViewerPrivileges.add(
-                                    RestrictedCalendarViewerPrivileges.builder()
-                                            .id(new RestrictionId(id.getValue(), data.memberId()))
-                                            .canSeeCalendarEntry(CanSeeCalendarEntryPrivilege.from(data.canSeeCalendarEntry()))
-                                            .canSeeCalendarEntryPayment(CanSeeCalendarEntryPaymentPrivilege.from(data.canSeeCalendarEntryPayment()))
-                                            .canSeeCalendarEntryDetails(CanSeeCalendarEntryDetailsPrivilege.from(data.canSeeCalendarEntryDetails()))
-                                            .build()
-                            );
+
+                            final var restriction = RestrictedCalendarViewerPrivileges.builder()
+                                    .id(new RestrictionId(id.getValue(), data.memberId()))
+                                    .canSeeCalendarEntry(CanSeeCalendarEntryPrivilege.from(data.canSeeCalendarEntry()))
+                                    .canSeeCalendarEntryPayment(CanSeeCalendarEntryPaymentPrivilege.from(data.canSeeCalendarEntryPayment()))
+                                    .canSeeCalendarEntryDetails(CanSeeCalendarEntryDetailsPrivilege.from(data.canSeeCalendarEntryDetails()))
+                                    .build();
+
+                            restrictedViewerPrivileges.add(restriction);
+                            final var event = DomainEventFactory.buildCalendarEntryRestrictionForMemberChangedEvent(restriction, this);
+                            eventHistory.register(event);
                         }
                 );
 
         validateCurrentState();
+        return this;
+    }
+
+    public List<DomainEvent> flushEvents() {
+        return eventHistory.flush();
+    }
+
+    CalendarEntry generateInitialEvents() {
+        final var creationEvent = DomainEventFactory.buildCalendarEntryAddedEvent(this);
+        eventHistory.register(creationEvent);
         return this;
     }
 

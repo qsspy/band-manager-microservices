@@ -5,10 +5,7 @@ import com.qsspy.commons.architecture.ddd.DomainValidationException;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -16,7 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name = "RESTRICTED_CALENDAR_ENTRY_VIEWER_PRIVILEGES")
-class RestrictedCalendarViewerPrivileges implements DomainEntity {
+@Getter(AccessLevel.PACKAGE)
+public class RestrictedCalendarViewerPrivileges implements DomainEntity {
 
     @EmbeddedId
     private RestrictionId id;

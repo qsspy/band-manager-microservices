@@ -22,7 +22,8 @@ public final class CalendarEntryFactory {
                 .eventDuration(specification.eventDuration() != null ? new EventDuration(specification.eventDuration()) : null)
                 .description(specification.description() != null ? new Description(specification.description()) : null)
                 .restrictedViewerPrivileges(Collections.emptyList())
-                .build();
+                .build()
+                .generateInitialEvents();
 
         entry.validateCurrentState();
 
