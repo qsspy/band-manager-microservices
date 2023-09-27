@@ -15,10 +15,8 @@
 	<name>band-manager</name>
 	<description>Monolithic version of band manager</description>
 	<modules>
-		<module>boot</module>
 		<module>commons</module>
         <module>calendars</module>
-        <module>domain-core</module>
 		<module>api-gateway</module>
 		<module>bands-command</module>
         <module>finances-command</module>
