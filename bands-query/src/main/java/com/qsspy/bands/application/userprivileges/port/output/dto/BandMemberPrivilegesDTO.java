@@ -1,5 +1,8 @@
 package com.qsspy.bands.application.userprivileges.port.output.dto;
 
+import lombok.Builder;
+
+@Builder
 public record BandMemberPrivilegesDTO(
         boolean canAccessCalendar,
         boolean canAddCalendarEntries,
