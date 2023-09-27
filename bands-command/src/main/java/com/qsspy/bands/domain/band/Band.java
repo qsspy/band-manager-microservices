@@ -114,6 +114,9 @@ public class Band {
             }
         }
 
+        final var event = DomainEventFactory.buildBandDefaultPrivilegesChangedEvent(defaultBandPrivileges);
+        eventHistory.register(event);
+
         return this;
     }
 
@@ -248,9 +251,11 @@ public class Band {
         return eventHistory.flush();
     }
 
-    Band generateBandCreatedEvent() {
-        final var event = DomainEventFactory.buildBandCreatedEvent(adminUser.getId(), id.getValue());
-        eventHistory.register(event);
+    Band generateBandCreationInitialEvents() {
+        final var bandCreationEvent = DomainEventFactory.buildBandCreatedEvent(adminUser.getId(), id.getValue());
+        final var defaultPrivilegesChangedEvent = DomainEventFactory.buildBandDefaultPrivilegesChangedEvent(defaultBandPrivileges);
+        eventHistory.register(bandCreationEvent);
+        eventHistory.register(defaultPrivilegesChangedEvent);
         return this;
     }
 

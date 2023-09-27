@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
+@Getter(AccessLevel.PACKAGE)
 class EntityId implements ValueObject, Serializable {
 
     @Column(name = "BAND_ID")

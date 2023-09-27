@@ -19,11 +19,13 @@ spring:
       definition:
         bandMemberAddedMessageRouter;
         bandMemberRemovedMessageRouter;
+        bandDefaultPrivilegesChangedMessageRouter;
     stream:
       function:
         bindings:
           bandMemberAddedMessageRouter-in-0: bm.band.member.added
           bandMemberRemovedMessageRouter-in-0: bm.band.member.removed
+          bandDefaultPrivilegesChangedMessageRouter-in-0: bm.band.default.privileges.changed
       default:
         group: ${spring.application.name}
         content-type: application/json
@@ -32,6 +34,8 @@ spring:
           destination: bm.band.member.added
         band-member-removed:
           destination: bm.band.member.removed
+        band-default-privileges-changed:
+          destination: bm.band.default.privileges.changed
       kafka:
         binder:
           auto-create-topics: true #TODO remove for manual topic creation

@@ -40,6 +40,10 @@ spring:
           destination: bm.band.member.privileges.changed
           producer:
             partition-key-expression: headers['partitionKey']
+        band-default-privileges-changed:
+          destination: bm.band.default.privileges.changed
+          producer:
+            partition-key-expression: headers['partitionKey']
       kafka:
         binder:
           auto-create-topics: true #TODO remove for manual topic creation

@@ -25,7 +25,7 @@ public final class BandFactory {
                 .memberPrivileges(Collections.emptyList())
                 .bandMembers(Collections.emptyList())
                 .build()
-                .generateBandCreatedEvent();
+                .generateBandCreationInitialEvents();
 
         band.validateCurrentState();
 

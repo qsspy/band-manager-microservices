@@ -62,6 +62,26 @@ final class DomainEventFactory {
                 .build();
     }
 
+    static BandDefaultPrivilegesChangedEvent buildBandDefaultPrivilegesChangedEvent(final DefaultBandPrivileges privileges) {
+        return BandDefaultPrivilegesChangedEvent.builder()
+                .eventId(UUID.randomUUID())
+                .occurredOn(now())
+
+                .bandId(privileges.getId().getValue())
+                .canAccessCalendar(privileges.getCanAccessCalendar().isAllowed())
+                .canAddCalendarEntries(privileges.getCanAddCalendarEntries().isAllowed())
+                .canEditCalendarEntries(privileges.getCanEditCalendarEntries().isAllowed())
+                .canDeleteCalendarEntries(privileges.getCanDeleteCalendarEntries().isAllowed())
+                .canAccessFinanceHistory(privileges.getCanAccessFinanceHistory().isAllowed())
+                .canAddFinanceEntries(privileges.getCanAddFinanceEntries().isAllowed())
+                .canSeeFinanceIncomeEntries(privileges.getCanSeeFinanceIncomeEntries().isAllowed())
+                .canSeeFinanceOutcomeEntries(privileges.getCanSeeFinanceOutcomeEntries().isAllowed())
+                .canSeeCalendarEntryByDefault(privileges.getCanSeeCalendarEntryByDefault().isAllowed())
+                .canSeeCalendarEntryPaymentByDefault(privileges.getCanSeeCalendarEntryPaymentByDefault().isAllowed())
+                .canSeeCalendarEntryDetailsByDefault(privileges.getCanSeeCalendarEntryDetailsByDefault().isAllowed())
+                .build();
+    }
+
     static private long now() {
         return Instant.now().toEpochMilli();
     }

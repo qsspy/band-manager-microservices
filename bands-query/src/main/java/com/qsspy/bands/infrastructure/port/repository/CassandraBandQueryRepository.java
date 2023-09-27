@@ -12,13 +12,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-class CassandraBandQueryRepository implements BandDefaultPrivilegesRepository, BandMemberPrivilegesRepository {
-
-
-    @Override
-    public Optional<BandDefaultPrivilegesDTO> finBandDefaultPrivileges(final UUID bandID) {
-        return Optional.empty();
-    }
+class CassandraBandQueryRepository implements BandMemberPrivilegesRepository {
 
     @Override
     public Optional<BandMemberPrivilegesDTO> finBandMemberPrivileges(final UUID bandId, final UUID memberId) {
