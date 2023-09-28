@@ -40,6 +40,10 @@ spring:
           destination: bm.calendar.entry.member.restriction.changed
           producer:
             partition-key-expression: headers['partitionKey']
+        calendar-entry-member-restriction-removed:
+          destination: bm.calendar.entry.member.restriction.removed
+          producer:
+            partition-key-expression: headers['partitionKey']
         calendar-entry-added:
           destination: bm.calendar.entry.added
           producer:
@@ -62,6 +66,10 @@ spring:
             partition-key-expression: headers['partitionKey']
         calendar-entry-for-member-removed:
           destination: bm.calendar.entry.for.member.removed
+          producer:
+            partition-key-expression: headers['partitionKey']
+        calendar-entry-member-privileges-changed:
+          destination: bm.calendar.entry.member.privileges.changed
           producer:
             partition-key-expression: headers['partitionKey']
       kafka:

@@ -26,18 +26,21 @@ spring:
         calendarEntryForMemberEditedMessageRouter;
         calendarEntryRemovedMessageRouter;
         calendarEntryForMemberRemovedMessageRouter;
+        calendarEntryMemberPrivilegesChangedMessageRouter;
     stream:
       function:
         bindings:
           bandMemberRemovedMessageRouter-in-0: band-member-removed
           calendarEntryMemberEmptyRestrictionCreatedMessageRouter-in-0: calendar-entry-member-empty-restriction-created
           calendarEntryMemberRestrictionChangedMessageRouter-in-0: calendar-entry-member-restriction-changed
+          calendarEntryMemberRestrictionRemovedMessageRouter-in-0: calendar-entry-member-restriction-removed
           calendarEntryAddedMessageRouter-in-0: calendar-entry-added
           calendarEntryForMemberAddedMessageRouter-in-0: calendar-entry-for-member-added
           calendarEntryEditedMessageRouter-in-0: calendar-entry-edited
           calendarEntryForMemberEditedMessageRouter-in-0: calendar-entry-for-member-edited
           calendarEntryRemovedMessageRouter-in-0: calendar-entry-removed
           calendarEntryForMemberRemovedMessageRouter-in-0: calendar-entry-for-member-removed
+          calendarEntryMemberPrivilegesChangedMessageRouter-in-0: calendar-entry-member-privileges-changed
       default:
         group: ${spring.application.name}
         content-type: application/json
@@ -50,6 +53,10 @@ spring:
             batch-mode: true
         calendar-entry-member-restriction-changed:
           destination: bm.calendar.entry.member.restriction.changed
+        calendar-entry-member-restriction-removed:
+          destination: bm.calendar.entry.member.restriction.removed
+          consumer:
+            batch-mode: true
         calendar-entry-added:
           destination: bm.calendar.entry.added
         calendar-entry-for-member-added:
@@ -66,6 +73,10 @@ spring:
           destination: bm.calendar.entry.removed
         calendar-entry-for-member-removed:
           destination: bm.calendar.entry.for.member.removed
+          consumer:
+            batch-mode: true
+        calendar-entry-member-privileges-changed:
+          destination: bm.calendar.entry.member.privileges.changed
           consumer:
             batch-mode: true
       kafka:

@@ -20,11 +20,13 @@ class DomainEventListener {
     private final List<DomainEventProcessor<CalendarEntryAddedEvent>> calendarEntryAddedProcessors;
     private final List<DomainEventProcessor<CalendarEntryEditedEvent>> calendarEntryEditedProcessors;
     private final List<DomainEventProcessor<CalendarEntryRemovedEvent>> calendarEntryRemovedProcessors;
+    private final List<DomainEventProcessor<CalendarEntryRestrictionForMemberChangedEvent>> calendarEntryRestrictionChangedProcessors;
 
     @EventListener
     public void handle(final CalendarEntryRestrictionForMemberChangedEvent event) {
         final var notificationEvent = EventMapper.toNotificationEvent(event);
         publisher.publish(notificationEvent);
+        DomainEventProcessor.processByAll(event, calendarEntryRestrictionChangedProcessors);
     }
 
     @EventListener

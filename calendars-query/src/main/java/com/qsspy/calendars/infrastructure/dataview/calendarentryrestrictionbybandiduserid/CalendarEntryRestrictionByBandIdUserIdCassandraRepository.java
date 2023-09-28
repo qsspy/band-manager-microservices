@@ -21,15 +21,18 @@ interface CalendarEntryRestrictionByBandIdUserIdCassandraRepository extends Cass
            SET is_visible = :isVisible,
            is_visible_details = :isVisibleDetails,
            is_visible_payment_amount = :isVisiblePaymentAmount
-           WHERE band_id = :bandId AND user_id = :userId AND entry_id = :entryId AND creation_time = :creationTime
+           WHERE band_id = :bandId
+                AND user_id = :userId
+                AND entry_id = :entryId
+                AND creation_time = :creationTime
            """)
     void updateRestrictionPrivileges(
-            @Param("bandId") UUID bandId,
-            @Param("userId") UUID userId,
-            @Param("entryId") UUID entryId,
-            @Param("creationTime") LocalDateTime creationTime,
-            @Param("isVisible") Boolean isVisible,
-            @Param("isVisibleDetails") Boolean isVisibleDetails,
-            @Param("isVisiblePaymentAmount") Boolean isVisiblePaymentAmount
+            @Param("bandId") final UUID bandId,
+            @Param("userId") final UUID userId,
+            @Param("entryId") final UUID entryId,
+            @Param("creationTime") final LocalDateTime creationTime,
+            @Param("isVisible") final Boolean isVisible,
+            @Param("isVisibleDetails") final Boolean isVisibleDetails,
+            @Param("isVisiblePaymentAmount") final Boolean isVisiblePaymentAmount
     );
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-class BandMemberAddedEventReplicationProcessor implements DataPropagationEventProcessor<BandMemberAddedEvent> {
+class BandMemberAddedEventRestrictionReplicationProcessor implements DataPropagationEventProcessor<BandMemberAddedEvent> {
 
     private final CalendarEntryPrivilegesViewRepository repository;
     private final NotificationEventPublisher publisher;

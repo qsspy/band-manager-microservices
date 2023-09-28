@@ -11,7 +11,8 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity(name = "DEFAULT_BAND_PRIVILEGES")
-@Setter(AccessLevel.PACKAGE)
+@Setter
+@Getter
 public class DefaultBandPrivileges {
 
     @Id

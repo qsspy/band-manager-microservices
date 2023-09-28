@@ -33,5 +33,25 @@ interface CalendarEntryByBandIdUserIdCassandraRepository extends CassandraReposi
             @Param("entryId") final UUID entryId
     );
 
+    @Query("""
+           UPDATE calendar_entry_by_band_id_user_id
+           SET is_visible = :isVisible,
+           is_visible_payment_amount = :isVisiblePaymentAmount,
+           is_visible_details = :isVisibleDetails
+           WHERE band_id = :bandId
+                AND user_id = :userId
+                AND entry_id = :entryId
+                AND creation_time = :eventDate
+           """)
+    void updateEntryPrivileges(
+            @Param("isVisible") final boolean isVisible,
+            @Param("isVisiblePaymentAmount") final boolean isVisiblePaymentAmount,
+            @Param("isVisibleDetails") final boolean isVisibleDetails,
+            @Param("bandId") final UUID bandId,
+            @Param("userId") final UUID userId,
+            @Param("eventDate") final LocalDateTime eventDate,
+            @Param("entryId") final UUID entryId
+    );
+
 
 }
