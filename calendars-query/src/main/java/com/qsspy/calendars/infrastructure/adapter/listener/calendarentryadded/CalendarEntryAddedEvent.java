@@ -1,7 +1,8 @@
-package com.qsspy.calendars.domain.calendar.event;
+package com.qsspy.calendars.infrastructure.adapter.listener.calendarentryadded;
 
-import com.qsspy.calendars.domain.calendar.EventKind;
-import com.qsspy.commons.architecture.eda.DomainEvent;
+import com.qsspy.calendars.application.entries.common.dto.EventKind;
+import com.qsspy.commons.architecture.eda.DataPropagationEvent;
+import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.Builder;
 import org.springframework.lang.Nullable;
 
@@ -26,4 +27,8 @@ public record CalendarEntryAddedEvent(
         Duration eventDuration,
         @Nullable
         String description
-) implements DomainEvent { }
+) implements DataPropagationEvent {
+
+    static final String EVENT_TYPE = "calendar.entry.added";
+    static final int EVENT_VERSION = 1;
+}

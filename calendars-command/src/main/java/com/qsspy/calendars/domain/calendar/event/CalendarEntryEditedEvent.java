@@ -11,12 +11,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Builder
-public record CalendarEntryAddedEvent(
+public record CalendarEntryEditedEvent(
         UUID eventId,
         long occurredOn,
 
         UUID entryId,
         UUID bandId,
+        LocalDateTime oldEventDate,
         LocalDateTime eventDate,
         EventKind eventKind,
         BigDecimal amount,

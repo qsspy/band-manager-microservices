@@ -1,6 +1,8 @@
 package com.qsspy.calendars.infrastructure.adapter.listener.domain;
 
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryAddedEvent;
+import com.qsspy.calendars.domain.calendar.event.CalendarEntryEditedEvent;
+import com.qsspy.calendars.domain.calendar.event.CalendarEntryRemovedEvent;
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryRestrictionForMemberChangedEvent;
 import com.qsspy.commons.architecture.eda.DomainEventProcessor;
 import com.qsspy.commons.port.output.publisher.notification.NotificationEventPublisher;
@@ -25,6 +27,20 @@ class DomainEventListener {
 
     @EventListener
     public void handle(final CalendarEntryAddedEvent event) {
+        final var notificationEvent = EventMapper.toNotificationEvent(event);
+        publisher.publish(notificationEvent);
         DomainEventProcessor.processByAll(event, calendarEntryAddedProcessors);
+    }
+
+    @EventListener
+    public void handle(final CalendarEntryEditedEvent event) {
+        final var notificationEvent = EventMapper.toNotificationEvent(event);
+        publisher.publish(notificationEvent);
+    }
+
+    @EventListener
+    public void handle(final CalendarEntryRemovedEvent event) {
+        final var notificationEvent = EventMapper.toNotificationEvent(event);
+        publisher.publish(notificationEvent);
     }
 }

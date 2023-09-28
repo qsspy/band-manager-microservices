@@ -11,19 +11,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Builder
-public record CalendarEntryAddedEvent(
+public record CalendarEntryRemovedEvent(
         UUID eventId,
         long occurredOn,
 
         UUID entryId,
         UUID bandId,
-        LocalDateTime eventDate,
-        EventKind eventKind,
-        BigDecimal amount,
-        @Nullable
-        String address,
-        @Nullable
-        Duration eventDuration,
-        @Nullable
-        String description
+        LocalDateTime eventDate
 ) implements DomainEvent { }

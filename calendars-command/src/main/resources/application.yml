@@ -36,7 +36,18 @@ spring:
           destination: bm.calendar.entry.member.restriction.changed
           producer:
             partition-key-expression: headers['partitionKey']
-
+        calendar-entry-added:
+          destination: bm.calendar.entry.added
+          producer:
+            partition-key-expression: headers['partitionKey']
+        calendar-entry-edited:
+          destination: bm.calendar.entry.edited
+          producer:
+            partition-key-expression: headers['partitionKey']
+        calendar-entry-removed:
+          destination: bm.calendar.entry.removed
+          producer:
+            partition-key-expression: headers['partitionKey']
       kafka:
         binder:
           auto-create-topics: true #TODO remove for manual topic creation

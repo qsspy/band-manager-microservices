@@ -5,6 +5,7 @@ import com.qsspy.calendars.application.entry.common.port.output.CalendarEntrySav
 import com.qsspy.calendars.application.entry.edit.port.input.EditCalendarEntryCommand;
 import com.qsspy.calendars.application.entry.edit.port.input.EditCalendarEntryCommandHandler;
 import com.qsspy.calendars.domain.calendar.CalendarEntry;
+import com.qsspy.commons.port.output.publisher.domain.DomainEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ class EditCalendarEntryCommandHandlerImpl implements EditCalendarEntryCommandHan
 
     private final CalendarEntryGetRepository getRepository;
     private final CalendarEntrySaveRepository saveRepository;
+    private final DomainEventPublisher publisher;
 
     @Override
     public void handle(final EditCalendarEntryCommand command) {
@@ -37,5 +39,6 @@ class EditCalendarEntryCommandHandlerImpl implements EditCalendarEntryCommandHan
         final var editData = CommandToDtoMapper.toEditData(command);
         entry.editEntry(editData);
         saveRepository.save(entry);
+        publisher.publishAll(entry.flushEvents());
     }
 }

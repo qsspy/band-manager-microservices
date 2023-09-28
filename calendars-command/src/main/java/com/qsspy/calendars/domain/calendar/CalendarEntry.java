@@ -9,7 +9,9 @@ import com.qsspy.commons.messaging.DomainEventHistory;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.lang.Nullable;
+import org.w3c.dom.events.Event;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder(access = AccessLevel.PACKAGE)
@@ -56,12 +58,17 @@ public class CalendarEntry implements AggregateRoot {
 
     public CalendarEntry editEntry(final EditCalendarEntryData editData) {
 
+        final var oldEventDate = eventDate;
+
         eventDate = new EventDate(editData.eventDate());
         eventKind = editData.eventKind();
         amount = new Amount(editData.amount());
         address = editData.address() != null ? new Address(editData.address()) : null;
         eventDuration = editData.eventDuration() != null ? new EventDuration(editData.eventDuration()) : null;
         description = editData.description() != null ? new Description(editData.description()) : null;
+
+        final var event = DomainEventFactory.buildCalendarEntryEditedEvent(this, oldEventDate.getValue());
+        eventHistory.register(event);
 
         validateCurrentState();
         return this;
@@ -102,6 +109,10 @@ public class CalendarEntry implements AggregateRoot {
 
     public List<DomainEvent> flushEvents() {
         return eventHistory.flush();
+    }
+
+    public LocalDateTime getEventDateValue() {
+        return eventDate.getValue();
     }
 
     CalendarEntry generateInitialEvents() {

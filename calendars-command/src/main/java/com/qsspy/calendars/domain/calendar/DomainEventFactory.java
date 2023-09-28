@@ -1,11 +1,14 @@
 package com.qsspy.calendars.domain.calendar;
 
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryAddedEvent;
+import com.qsspy.calendars.domain.calendar.event.CalendarEntryEditedEvent;
+import com.qsspy.calendars.domain.calendar.event.CalendarEntryRemovedEvent;
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryRestrictionForMemberChangedEvent;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -31,9 +34,26 @@ final class DomainEventFactory {
                 .eventId(UUID.randomUUID())
                 .occurredOn(Instant.now().toEpochMilli())
 
-                .eventId(entry.getId().getValue())
+                .entryId(entry.getId().getValue())
                 .bandId(entry.getBandId().getValue())
                 .eventDate(entry.getEventDate().getValue())
+                .eventKind(entry.getEventKind())
+                .amount(entry.getAmount().getValue())
+                .address(entry.getAddress() != null ? entry.getAddress().getFullAddress() : null)
+                .eventDuration(entry.getEventDuration() != null ? entry.getEventDuration().getValue() : null)
+                .description(entry.getDescription() != null ? entry.getDescription().getText() : null)
+                .build();
+    }
+
+    static CalendarEntryEditedEvent buildCalendarEntryEditedEvent(final CalendarEntry entry, final LocalDateTime oldEventDate) {
+        return CalendarEntryEditedEvent.builder()
+                .eventId(UUID.randomUUID())
+                .occurredOn(Instant.now().toEpochMilli())
+
+                .entryId(entry.getId().getValue())
+                .bandId(entry.getBandId().getValue())
+                .eventDate(entry.getEventDate().getValue())
+                .oldEventDate(oldEventDate)
                 .eventKind(entry.getEventKind())
                 .amount(entry.getAmount().getValue())
                 .address(entry.getAddress() != null ? entry.getAddress().getFullAddress() : null)
