@@ -1,6 +1,7 @@
 package com.qsspy.calendars.infrastructure.eventreplication.emptymemberrestriction;
 
 import com.qsspy.calendars.infrastructure.adapter.listener.notification.bandmemberremoved.BandMemberRemovedEvent;
+import com.qsspy.calendars.infrastructure.eventreplication.BandMemberEntity;
 import com.qsspy.commons.architecture.eda.DataPropagationEventProcessor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

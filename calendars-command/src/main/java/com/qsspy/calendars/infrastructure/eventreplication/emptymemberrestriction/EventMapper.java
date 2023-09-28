@@ -2,6 +2,7 @@ package com.qsspy.calendars.infrastructure.eventreplication.emptymemberrestricti
 
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryAddedEvent;
 import com.qsspy.calendars.infrastructure.adapter.listener.notification.bandmemberadded.BandMemberAddedEvent;
+import com.qsspy.calendars.infrastructure.eventreplication.BandMemberEntity;
 import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

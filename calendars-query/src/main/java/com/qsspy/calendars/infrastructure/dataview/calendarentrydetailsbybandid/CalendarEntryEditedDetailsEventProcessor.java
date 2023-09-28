@@ -25,7 +25,6 @@ class CalendarEntryEditedDetailsEventProcessor implements DataPropagationEventPr
                 .description(event.description())
                 .build();
 
-        repository.deleteById(new CalendarEntryDetailsByBandId.Id(event.bandId(), event.eventId()));
         repository.save(entity);
     }
 }

@@ -15,11 +15,13 @@ spring:
       definition:
         bandMemberAddedMessageRouter;
         bandMemberRemovedMessageRouter;
+        bandMemberDefaultPrivilegesChangedMessageRouter;
     stream:
       function:
         bindings:
           bandMemberAddedMessageRouter-in-0: band-member-added
           bandMemberRemovedMessageRouter-in-0: band-member-removed
+          bandMemberDefaultPrivilegesChangedMessageRouter-in-0: band-default-privileges-changed
       default:
         group: ${spring.application.name}
         content-type: application/json
@@ -28,6 +30,8 @@ spring:
           destination: bm.band.member.added
         band-member-removed:
           destination: bm.band.member.removed
+        band-default-privileges-changed:
+          destination: bm.band.default.privileges.changed
         calendar-entry-member-empty-restriction-created:
           destination: bm.calendar.entry.member.empty.restriction.created
           producer:
@@ -38,6 +42,10 @@ spring:
             partition-key-expression: headers['partitionKey']
         calendar-entry-added:
           destination: bm.calendar.entry.added
+          producer:
+            partition-key-expression: headers['partitionKey']
+        calendar-entry-for-member-added:
+          destination: bm.calendar.entry.for.member.added
           producer:
             partition-key-expression: headers['partitionKey']
         calendar-entry-edited:

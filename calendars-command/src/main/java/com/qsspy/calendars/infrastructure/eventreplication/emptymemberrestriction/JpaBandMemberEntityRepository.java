@@ -1,5 +1,6 @@
 package com.qsspy.calendars.infrastructure.eventreplication.emptymemberrestriction;
 
+import com.qsspy.calendars.infrastructure.eventreplication.BandMemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

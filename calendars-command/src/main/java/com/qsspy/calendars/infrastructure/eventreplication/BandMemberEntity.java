@@ -1,4 +1,4 @@
-package com.qsspy.calendars.infrastructure.eventreplication.emptymemberrestriction;
+package com.qsspy.calendars.infrastructure.eventreplication;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-class BandMemberEntity {
+public class BandMemberEntity {
 
     @EmbeddedId
     private Id id;
@@ -26,7 +26,7 @@ class BandMemberEntity {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Getter
-    static class Id implements Serializable {
+    public static class Id implements Serializable {
         @Column(name = "BAND_ID")
         private UUID bandId;
 

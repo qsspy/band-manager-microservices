@@ -21,6 +21,7 @@ spring:
         calendarEntryMemberEmptyRestrictionCreatedMessageRouter;
         calendarEntryMemberRestrictionChangedMessageRouter;
         calendarEntryAddedMessageRouter;
+        calendarEntryForMemberAddedMessageRouter;
         calendarEntryEditedMessageRouter;
         calendarEntryRemovedMessageRouter;
     stream:
@@ -30,6 +31,7 @@ spring:
           calendarEntryMemberEmptyRestrictionCreatedMessageRouter-in-0: calendar-entry-member-empty-restriction-created
           calendarEntryMemberRestrictionChangedMessageRouter-in-0: calendar-entry-member-restriction-changed
           calendarEntryAddedMessageRouter-in-0: bm.calendar.entry.added
+          calendarEntryForMemberAddedMessageRouter-in-0: bm.calendar.entry.for.member.added
           calendarEntryEditedMessageRouter-in-0: bm.calendar.entry.edited
           calendarEntryRemovedMessageRouter-in-0: bm.calendar.entry.removed
       default:
@@ -46,6 +48,8 @@ spring:
           destination: bm.calendar.entry.member.restriction.changed
         calendar-entry-added:
           destination: bm.calendar.entry.added
+        calendar-entry-for-member-added:
+          destination: bm.calendar.entry.for.member.added
         calendar-entry-edited:
           destination: bm.calendar.entry.edited
         calendar-entry-removed:
