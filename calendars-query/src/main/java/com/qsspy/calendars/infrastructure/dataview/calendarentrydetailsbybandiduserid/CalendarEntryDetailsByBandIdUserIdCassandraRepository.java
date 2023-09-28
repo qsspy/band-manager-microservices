@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -44,4 +46,7 @@ interface CalendarEntryDetailsByBandIdUserIdCassandraRepository extends Cassandr
             @Param("userId") final UUID userId,
             @Param("entryId") final UUID entryId
     );
+
+    Optional<CalendarEntryDetailsByBandIdUserId> findByKey_BandIdAndKey_UserIdAndKey_EventIdAndIsVisible(final UUID bandId, final UUID userId, final UUID eventId, final boolean isVisible);
+
 }

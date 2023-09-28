@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -52,6 +53,8 @@ interface CalendarEntryByBandIdUserIdCassandraRepository extends CassandraReposi
             @Param("eventDate") final LocalDateTime eventDate,
             @Param("entryId") final UUID entryId
     );
+
+    List<CalendarEntryByBandIdUserId> findByKey_BandIdAndKey_UserIdAndIsVisible(final UUID bandId, final UUID userId, final boolean isVisible);
 
 
 }

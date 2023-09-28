@@ -6,13 +6,16 @@ import com.qsspy.calendars.application.entries.details.port.input.GetCalendarEnt
 import com.qsspy.calendars.application.entries.details.port.output.CalendarEntryDetailsGetRepository;
 import com.qsspy.calendars.application.entries.details.port.output.dto.CalendarEntryDetailsDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 class GetCalendarEntryDetailsQueryHandlerImpl implements GetCalendarEntryDetailsQueryHandler {
 
+    @Qualifier("adminCassandraCalendarEntryDetailsGetRepository")
     private final CalendarEntryDetailsGetRepository adminRepository;
+    @Qualifier("memberCassandraCalendarEntryDetailsGetRepository")
     private final CalendarEntryDetailsGetRepository memberRepository;
 
     @Override

@@ -6,6 +6,7 @@ import com.qsspy.calendars.application.entries.list.port.input.GetCalendarEntryL
 import com.qsspy.calendars.application.entries.list.port.output.CalendarEntryListRepository;
 import com.qsspy.calendars.application.entries.list.port.output.dto.CalendarEntryDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,9 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 class GetCalendarEntryListQueryHandlerImpl implements GetCalendarEntryListQueryHandler {
 
+    @Qualifier("memberCassandraCalendarEntryListRepository")
     private final CalendarEntryListRepository memberRepository;
+    @Qualifier("adminCassandraCalendarEntryListRepository")
     private final CalendarEntryListRepository adminRepository;
 
     @Override
