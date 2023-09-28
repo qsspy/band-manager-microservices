@@ -1,8 +1,8 @@
 package com.qsspy.calendars.infrastructure.eventreplication;
 
-import com.qsspy.commons.architecture.ddd.DomainEntity;
-import com.qsspy.commons.architecture.ddd.DomainValidationException;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
 
 import java.util.UUID;

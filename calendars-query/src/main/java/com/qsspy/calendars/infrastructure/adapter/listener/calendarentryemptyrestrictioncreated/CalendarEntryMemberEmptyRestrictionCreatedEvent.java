@@ -3,7 +3,6 @@ package com.qsspy.calendars.infrastructure.adapter.listener.calendarentryemptyre
 import com.qsspy.calendars.application.entries.common.dto.EventKind;
 import com.qsspy.commons.architecture.eda.DataPropagationEvent;
 import lombok.Builder;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

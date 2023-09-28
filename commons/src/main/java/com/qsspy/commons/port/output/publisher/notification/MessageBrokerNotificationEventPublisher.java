@@ -1,6 +1,5 @@
 package com.qsspy.commons.port.output.publisher.notification;
 
-import com.qsspy.commons.architecture.eda.DomainEvent;
 import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

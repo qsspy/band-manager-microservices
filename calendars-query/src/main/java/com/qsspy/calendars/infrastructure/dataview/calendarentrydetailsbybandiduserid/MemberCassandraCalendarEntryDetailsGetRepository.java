@@ -2,7 +2,6 @@ package com.qsspy.calendars.infrastructure.dataview.calendarentrydetailsbybandid
 
 import com.qsspy.calendars.application.entries.details.port.output.CalendarEntryDetailsGetRepository;
 import com.qsspy.calendars.application.entries.details.port.output.dto.CalendarEntryDetailsDTO;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

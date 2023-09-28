@@ -2,7 +2,6 @@ package com.qsspy.calendars.infrastructure.adapter.listener.calendarentryedited;
 
 import com.qsspy.calendars.application.entries.common.dto.EventKind;
 import com.qsspy.commons.architecture.eda.DataPropagationEvent;
-import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.Builder;
 import org.springframework.lang.Nullable;
 

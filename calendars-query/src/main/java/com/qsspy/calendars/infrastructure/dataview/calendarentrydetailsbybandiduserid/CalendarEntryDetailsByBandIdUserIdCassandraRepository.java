@@ -1,14 +1,10 @@
 package com.qsspy.calendars.infrastructure.dataview.calendarentrydetailsbybandiduserid;
 
-import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.data.cassandra.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

@@ -9,7 +9,6 @@ import com.qsspy.commons.messaging.DomainEventHistory;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.lang.Nullable;
-import org.w3c.dom.events.Event;
 
 import java.time.LocalDateTime;
 import java.util.List;

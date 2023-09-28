@@ -1,6 +1,5 @@
 package com.qsspy.calendars.infrastructure.eventreplication.restrictionremoval;
 
-import com.qsspy.calendars.domain.calendar.EventKind;
 import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.Builder;
 

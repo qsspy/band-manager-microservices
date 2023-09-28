@@ -1,7 +1,6 @@
 package com.qsspy.calendars.infrastructure.adapter.listener.calendarentryremoved;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qsspy.calendars.infrastructure.adapter.listener.calendarentryedited.CalendarEntryEditedEvent;
 import com.qsspy.commons.architecture.eda.DataPropagationEventProcessor;
 import com.qsspy.commons.messaging.SynchronousMessageRouter;
 import lombok.RequiredArgsConstructor;

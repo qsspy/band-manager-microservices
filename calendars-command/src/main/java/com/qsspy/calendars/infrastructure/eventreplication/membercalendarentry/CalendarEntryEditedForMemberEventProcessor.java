@@ -1,6 +1,5 @@
 package com.qsspy.calendars.infrastructure.eventreplication.membercalendarentry;
 
-import com.qsspy.calendars.domain.calendar.event.CalendarEntryAddedEvent;
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryEditedEvent;
 import com.qsspy.commons.architecture.eda.DomainEventProcessor;
 import com.qsspy.commons.port.output.publisher.notification.NotificationEventPublisher;

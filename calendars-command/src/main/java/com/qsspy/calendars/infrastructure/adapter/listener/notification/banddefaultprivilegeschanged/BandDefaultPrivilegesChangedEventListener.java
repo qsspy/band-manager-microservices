@@ -1,7 +1,6 @@
 package com.qsspy.calendars.infrastructure.adapter.listener.notification.banddefaultprivilegeschanged;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qsspy.calendars.infrastructure.adapter.listener.notification.bandmemberadded.BandMemberAddedEvent;
 import com.qsspy.commons.architecture.eda.DataPropagationEventProcessor;
 import com.qsspy.commons.messaging.SynchronousMessageRouter;
 import lombok.RequiredArgsConstructor;

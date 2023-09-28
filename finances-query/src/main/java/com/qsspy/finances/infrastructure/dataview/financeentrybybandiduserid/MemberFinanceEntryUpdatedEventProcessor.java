@@ -3,11 +3,7 @@ package com.qsspy.finances.infrastructure.dataview.financeentrybybandiduserid;
 import com.qsspy.commons.architecture.eda.DataPropagationEventProcessor;
 import com.qsspy.finances.infrastructure.adapter.listener.memberfinanceentryupdated.MemberFinanceEntryUpdatedEvent;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 
 @Component
 @RequiredArgsConstructor

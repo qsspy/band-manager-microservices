@@ -1,7 +1,6 @@
 package com.qsspy.calendars.infrastructure.adapter.listener.calendarentryremoved;
 
 import com.qsspy.commons.architecture.eda.DataPropagationEvent;
-import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.Builder;
 
 import java.time.LocalDateTime;

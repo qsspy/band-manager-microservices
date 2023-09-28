@@ -1,6 +1,5 @@
 package com.qsspy.calendars.infrastructure.dataview.calendarentrydetailsbybandiduserid;
 
-import com.qsspy.calendars.infrastructure.adapter.listener.calendarentryaddedformember.CalendarEntryAddedForMemberEvent;
 import com.qsspy.calendars.infrastructure.adapter.listener.calendarentryremovedformember.CalendarEntryRemovedForMemberEvent;
 import com.qsspy.commons.architecture.eda.DataPropagationEventProcessor;
 import lombok.RequiredArgsConstructor;

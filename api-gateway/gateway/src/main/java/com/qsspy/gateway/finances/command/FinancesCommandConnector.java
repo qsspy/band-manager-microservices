@@ -1,9 +1,9 @@
 package com.qsspy.gateway.finances.command;
 
-import com.qsspy.commons.rest.CustomHttpHeaders;
-import com.qsspy.gateway.bands.command.*;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.UUID;
 

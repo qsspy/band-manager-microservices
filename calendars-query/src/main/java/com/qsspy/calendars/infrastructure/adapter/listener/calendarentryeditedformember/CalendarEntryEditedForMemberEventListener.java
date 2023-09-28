@@ -3,7 +3,6 @@ package com.qsspy.calendars.infrastructure.adapter.listener.calendarentryeditedf
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qsspy.commons.architecture.eda.DataPropagationEventProcessor;
 import com.qsspy.commons.messaging.ParallelMessageRouter;
-import com.qsspy.commons.messaging.SynchronousMessageRouter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

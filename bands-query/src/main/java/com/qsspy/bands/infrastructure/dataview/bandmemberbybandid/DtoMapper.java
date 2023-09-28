@@ -1,7 +1,6 @@
 package com.qsspy.bands.infrastructure.dataview.bandmemberbybandid;
 
 import com.qsspy.bands.application.members.port.output.dto.BandMemberDTO;
-import com.qsspy.bands.infrastructure.dataview.bandmemberbybandid.BandMemberByBandId;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

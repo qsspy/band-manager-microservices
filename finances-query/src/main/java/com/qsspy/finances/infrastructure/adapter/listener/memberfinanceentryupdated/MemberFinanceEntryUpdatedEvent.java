@@ -1,7 +1,6 @@
 package com.qsspy.finances.infrastructure.adapter.listener.memberfinanceentryupdated;
 
 import com.qsspy.commons.architecture.eda.DataPropagationEvent;
-import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.Builder;
 import org.springframework.lang.Nullable;
 

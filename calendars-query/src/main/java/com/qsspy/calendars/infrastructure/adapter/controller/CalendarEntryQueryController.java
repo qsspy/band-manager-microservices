@@ -9,7 +9,6 @@ import com.qsspy.calendars.application.membersrestrictions.port.input.GetCalenda
 import com.qsspy.commons.rest.CustomHttpHeaders;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

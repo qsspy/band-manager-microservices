@@ -1,6 +1,5 @@
 package com.qsspy.commons.port.output.publisher.notification;
 
-import com.qsspy.commons.architecture.eda.DomainEvent;
 import com.qsspy.commons.architecture.eda.NotificationEvent;
 
 import java.util.Collection;

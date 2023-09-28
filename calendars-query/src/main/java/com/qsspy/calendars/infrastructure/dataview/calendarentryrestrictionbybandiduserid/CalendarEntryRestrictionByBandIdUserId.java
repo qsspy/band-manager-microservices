@@ -2,7 +2,9 @@ package com.qsspy.calendars.infrastructure.dataview.calendarentryrestrictionbyba
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.data.cassandra.core.mapping.*;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 import org.springframework.lang.Nullable;
 
 @Table("calendar_entry_restriction_by_band_id_user_id")

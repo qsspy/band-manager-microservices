@@ -1,9 +1,8 @@
 package com.qsspy.gateway.bands.query;
 
-import com.qsspy.commons.rest.CustomHttpHeaders;
-import com.qsspy.gateway.bands.command.*;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 

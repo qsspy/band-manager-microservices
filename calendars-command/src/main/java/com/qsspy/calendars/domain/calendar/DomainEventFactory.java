@@ -2,7 +2,6 @@ package com.qsspy.calendars.domain.calendar;
 
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryAddedEvent;
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryEditedEvent;
-import com.qsspy.calendars.domain.calendar.event.CalendarEntryRemovedEvent;
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryRestrictionForMemberChangedEvent;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

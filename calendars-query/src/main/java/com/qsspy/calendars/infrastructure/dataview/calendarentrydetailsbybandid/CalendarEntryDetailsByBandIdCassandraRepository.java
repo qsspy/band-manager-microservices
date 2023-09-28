@@ -3,8 +3,6 @@ package com.qsspy.calendars.infrastructure.dataview.calendarentrydetailsbybandid
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 interface CalendarEntryDetailsByBandIdCassandraRepository extends CassandraRepository<CalendarEntryDetailsByBandId, CalendarEntryDetailsByBandId.Id> {
 

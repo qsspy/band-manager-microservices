@@ -1,6 +1,5 @@
 package com.qsspy.bands.infrastucture.adapter.listener.domain;
 
-import com.qsspy.commons.architecture.eda.DomainEvent;
 import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.Builder;
 

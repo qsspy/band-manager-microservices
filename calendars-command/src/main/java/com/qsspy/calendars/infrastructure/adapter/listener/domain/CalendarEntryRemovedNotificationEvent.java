@@ -1,12 +1,8 @@
 package com.qsspy.calendars.infrastructure.adapter.listener.domain;
 
-import com.qsspy.calendars.domain.calendar.EventKind;
 import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.Builder;
-import org.springframework.lang.Nullable;
 
-import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

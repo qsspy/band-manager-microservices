@@ -3,7 +3,6 @@ package com.qsspy.authservice.infrastructure.port.repository;
 import com.qsspy.authservice.application.authorizer.port.input.UserContext;
 import com.qsspy.authservice.application.authorizer.port.output.UserContextRepository;
 import com.qsspy.authservice.application.login.port.output.UserLoginRepository;
-import com.qsspy.authservice.application.register.port.input.RegisterCommand;
 import com.qsspy.authservice.application.register.port.output.UserRegisterRepository;
 import com.qsspy.authservice.domain.memberprivileges.BandMemberPrivileges;
 import com.qsspy.authservice.domain.user.User;

@@ -1,7 +1,6 @@
 package com.qsspy.calendars.infrastructure.adapter.listener.notification.banddefaultprivilegeschanged;
 
 import com.qsspy.commons.architecture.eda.DataPropagationEvent;
-import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.Builder;
 
 import java.util.UUID;

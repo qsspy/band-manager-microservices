@@ -1,7 +1,6 @@
 package com.qsspy.bands.infrastructure.adapter.listener.banddefaultprivilegeschanged;
 
 import com.qsspy.commons.architecture.eda.DataPropagationEvent;
-import com.qsspy.commons.architecture.eda.DomainEvent;
 import lombok.Builder;
 
 import java.util.UUID;

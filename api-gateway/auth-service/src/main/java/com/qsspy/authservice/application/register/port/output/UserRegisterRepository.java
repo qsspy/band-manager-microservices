@@ -1,6 +1,5 @@
 package com.qsspy.authservice.application.register.port.output;
 
-import com.qsspy.authservice.application.register.port.input.RegisterCommand;
 import com.qsspy.authservice.domain.user.User;
 
 public interface UserRegisterRepository {

@@ -1,7 +1,6 @@
 package com.qsspy.gateway.calendars.command;
 
 import com.qsspy.commons.rest.CustomHttpHeaders;
-import com.qsspy.gateway.bands.command.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

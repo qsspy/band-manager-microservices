@@ -3,7 +3,6 @@ package com.qsspy.finances.infrastructure.adapter.listener.notification.bandmemb
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qsspy.commons.architecture.eda.DataPropagationEventProcessor;
 import com.qsspy.commons.messaging.SynchronousMessageRouter;
-import com.qsspy.finances.infrastructure.adapter.listener.notification.bandmemberprivilegeschanged.BandMemberPrivilegesChangedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

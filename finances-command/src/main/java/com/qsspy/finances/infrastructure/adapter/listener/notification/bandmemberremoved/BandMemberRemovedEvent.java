@@ -1,7 +1,6 @@
 package com.qsspy.finances.infrastructure.adapter.listener.notification.bandmemberremoved;
 
 import com.qsspy.commons.architecture.eda.DataPropagationEvent;
-import com.qsspy.commons.architecture.eda.DomainEvent;
 import lombok.Builder;
 
 import java.util.UUID;

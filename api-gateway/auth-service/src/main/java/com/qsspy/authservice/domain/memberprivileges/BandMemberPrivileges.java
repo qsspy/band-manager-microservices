@@ -1,7 +1,6 @@
 package com.qsspy.authservice.domain.memberprivileges;
 
 import com.qsspy.commons.architecture.ddd.AggregateRoot;
-import com.qsspy.commons.architecture.ddd.DomainEntity;
 import com.qsspy.commons.architecture.ddd.DomainValidationException;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.EmbeddedId;

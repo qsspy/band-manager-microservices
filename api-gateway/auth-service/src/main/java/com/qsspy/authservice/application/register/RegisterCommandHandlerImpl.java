@@ -4,7 +4,6 @@ import com.qsspy.authservice.application.register.port.input.RegisterCommand;
 import com.qsspy.authservice.application.register.port.input.RegisterCommandHandler;
 import com.qsspy.authservice.application.register.port.input.UserAlreadyExistsException;
 import com.qsspy.authservice.application.register.port.output.UserRegisterRepository;
-import com.qsspy.commons.port.output.publisher.domain.DomainEventPublisher;
 import com.qsspy.commons.port.output.publisher.notification.NotificationEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

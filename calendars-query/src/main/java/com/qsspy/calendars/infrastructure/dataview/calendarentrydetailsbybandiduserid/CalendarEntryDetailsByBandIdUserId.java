@@ -8,7 +8,6 @@ import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.*;
 import org.springframework.lang.Nullable;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Table("calendar_entry_details_by_band_id_user_id_event_id")
