@@ -23,7 +23,8 @@
         <module>bands-query</module>
         <module>finances-query</module>
 		<module>calendars-query</module>
-	</modules>
+        <module>grpc-proto-api</module>
+    </modules>
 
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>
@@ -35,6 +36,7 @@
 
 		<lombok.version>1.18.30</lombok.version>
 		<spring-cloud-dependencies.version>2022.0.4</spring-cloud-dependencies.version>
+		<grpc-spring-boot-starter.version>2.13.1.RELEASE</grpc-spring-boot-starter.version>
 	</properties>
 
 	<dependencyManagement>
@@ -77,6 +79,11 @@
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.qsspy</groupId>
+				<artifactId>grpc-proto-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>io.jsonwebtoken</groupId>
 				<artifactId>jjwt-api</artifactId>
 				<version>${jwt.version}</version>
@@ -95,6 +102,16 @@
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>${lombok.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.devh</groupId>
+				<artifactId>grpc-server-spring-boot-starter</artifactId>
+				<version>${grpc-spring-boot-starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.devh</groupId>
+				<artifactId>grpc-client-spring-boot-starter</artifactId>
+				<version>${grpc-spring-boot-starter.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

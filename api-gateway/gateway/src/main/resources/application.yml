@@ -51,8 +51,6 @@ jwt:
 clients:
   bands-command:
     url: bands-command:8080
-  finances-command:
-    url: finances-command:8080
   calendars-command:
     url: calendars-command:8080
   bands-query:
@@ -61,3 +59,8 @@ clients:
     url: finances-query:8080
   calendars-query:
     url: calendars-query:8080
+grpc:
+  client:
+    finances-command:
+      address: static://finances-command:8082
+      negotiationType: PLAINTEXT

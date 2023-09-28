@@ -40,3 +40,8 @@ spring:
         binder:
           auto-create-topics: true #TODO remove for manual topic creation
           brokers: kafka1:9091,kafka2:9092,kafka3:9093
+grpc:
+  server:
+#    security:
+#      enabled: false
+    port: 8080

@@ -23,8 +23,6 @@ spring:
 clients:
   bands-command:
     url: localhost:8081
-  finances-command:
-    url: localhost:8082
   calendars-command:
     url: localhost:8083
   bands-query:
@@ -33,3 +31,7 @@ clients:
     url: localhost:8085
   calendars-query:
     url: localhost:8086
+grpc:
+  client:
+    finances-command:
+      address: static://localhost:8082

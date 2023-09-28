@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "com.qsspy.grpc.finances.command";
+
+message AddFinanceEntryRequest {
+  string bandId = 1;
+  string initiatorsBandId = 2;
+  string initiatorsEmail = 3;
+  string amount = 4;
+  string description = 5;
+  bool isOutcome = 6;
+}
+
+
+service FinancesCommandService {
+  // Sends a greeting
+  rpc AddFinanceEntry (AddFinanceEntryRequest) returns (google.protobuf.Empty) {
+  }
+}
