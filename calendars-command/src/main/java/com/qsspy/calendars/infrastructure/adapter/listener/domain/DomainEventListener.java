@@ -19,6 +19,7 @@ class DomainEventListener {
     private final NotificationEventPublisher publisher;
     private final List<DomainEventProcessor<CalendarEntryAddedEvent>> calendarEntryAddedProcessors;
     private final List<DomainEventProcessor<CalendarEntryEditedEvent>> calendarEntryEditedProcessors;
+    private final List<DomainEventProcessor<CalendarEntryRemovedEvent>> calendarEntryRemovedProcessors;
 
     @EventListener
     public void handle(final CalendarEntryRestrictionForMemberChangedEvent event) {
@@ -44,5 +45,6 @@ class DomainEventListener {
     public void handle(final CalendarEntryRemovedEvent event) {
         final var notificationEvent = EventMapper.toNotificationEvent(event);
         publisher.publish(notificationEvent);
+        DomainEventProcessor.processByAll(event, calendarEntryRemovedProcessors);
     }
 }

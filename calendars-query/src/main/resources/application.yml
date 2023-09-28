@@ -25,6 +25,7 @@ spring:
         calendarEntryEditedMessageRouter;
         calendarEntryForMemberEditedMessageRouter;
         calendarEntryRemovedMessageRouter;
+        calendarEntryForMemberRemovedMessageRouter;
     stream:
       function:
         bindings:
@@ -36,6 +37,7 @@ spring:
           calendarEntryEditedMessageRouter-in-0: calendar-entry-edited
           calendarEntryForMemberEditedMessageRouter-in-0: calendar-entry-for-member-edited
           calendarEntryRemovedMessageRouter-in-0: calendar-entry-removed
+          calendarEntryForMemberRemovedMessageRouter-in-0: calendar-entry-for-member-removed
       default:
         group: ${spring.application.name}
         content-type: application/json
@@ -52,12 +54,20 @@ spring:
           destination: bm.calendar.entry.added
         calendar-entry-for-member-added:
           destination: bm.calendar.entry.for.member.added
+          consumer:
+            batch-mode: true
         calendar-entry-edited:
           destination: bm.calendar.entry.edited
         calendar-entry-for-member-edited:
           destination: bm.calendar.entry.for.member.edited
+          consumer:
+            batch-mode: true
         calendar-entry-removed:
           destination: bm.calendar.entry.removed
+        calendar-entry-for-member-removed:
+          destination: bm.calendar.entry.for.member.removed
+          consumer:
+            batch-mode: true
       kafka:
         binder:
           auto-create-topics: true #TODO remove for manual topic creation

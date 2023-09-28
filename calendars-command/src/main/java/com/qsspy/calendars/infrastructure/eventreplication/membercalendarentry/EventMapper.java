@@ -2,6 +2,7 @@ package com.qsspy.calendars.infrastructure.eventreplication.membercalendarentry;
 
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryAddedEvent;
 import com.qsspy.calendars.domain.calendar.event.CalendarEntryEditedEvent;
+import com.qsspy.calendars.domain.calendar.event.CalendarEntryRemovedEvent;
 import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -30,14 +31,14 @@ final class EventMapper {
                 .build();
     }
 
-    static NotificationEvent toNotificationEvent(final CalendarEntryEditedEvent event, final UUID memberID) {
+    static NotificationEvent toNotificationEvent(final CalendarEntryEditedEvent event, final UUID memberId) {
         return CalendarEntryEditedForMemberNotificationEvent.builder()
                 .eventId(event.eventId())
                 .occurredOn(event.occurredOn())
 
                 .entryId(event.entryId())
                 .bandId(event.bandId())
-                .memberId(memberID)
+                .memberId(memberId)
                 .eventDate(event.eventDate())
                 .oldEventDate(event.oldEventDate())
                 .eventKind(event.eventKind())
@@ -45,6 +46,18 @@ final class EventMapper {
                 .address(event.address())
                 .eventDuration(event.eventDuration())
                 .description(event.description())
+                .build();
+    }
+
+    static NotificationEvent toNotificationEvent(final CalendarEntryRemovedEvent event, final UUID memberId) {
+        return CalendarEntryRemovedForMemberNotificationEvent.builder()
+                .eventId(event.eventId())
+                .occurredOn(event.occurredOn())
+
+                .entryId(event.entryId())
+                .bandId(event.bandId())
+                .memberId(memberId)
+                .eventDate(event.eventDate())
                 .build();
     }
 }
