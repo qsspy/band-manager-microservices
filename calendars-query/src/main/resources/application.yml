@@ -23,6 +23,7 @@ spring:
         calendarEntryAddedMessageRouter;
         calendarEntryForMemberAddedMessageRouter;
         calendarEntryEditedMessageRouter;
+        calendarEntryForMemberEditedMessageRouter;
         calendarEntryRemovedMessageRouter;
     stream:
       function:
@@ -30,10 +31,11 @@ spring:
           bandMemberRemovedMessageRouter-in-0: band-member-removed
           calendarEntryMemberEmptyRestrictionCreatedMessageRouter-in-0: calendar-entry-member-empty-restriction-created
           calendarEntryMemberRestrictionChangedMessageRouter-in-0: calendar-entry-member-restriction-changed
-          calendarEntryAddedMessageRouter-in-0: bm.calendar.entry.added
-          calendarEntryForMemberAddedMessageRouter-in-0: bm.calendar.entry.for.member.added
-          calendarEntryEditedMessageRouter-in-0: bm.calendar.entry.edited
-          calendarEntryRemovedMessageRouter-in-0: bm.calendar.entry.removed
+          calendarEntryAddedMessageRouter-in-0: calendar-entry-added
+          calendarEntryForMemberAddedMessageRouter-in-0: calendar-entry-for-member-added
+          calendarEntryEditedMessageRouter-in-0: calendar-entry-edited
+          calendarEntryForMemberEditedMessageRouter-in-0: calendar-entry-for-member-edited
+          calendarEntryRemovedMessageRouter-in-0: calendar-entry-removed
       default:
         group: ${spring.application.name}
         content-type: application/json
@@ -52,6 +54,8 @@ spring:
           destination: bm.calendar.entry.for.member.added
         calendar-entry-edited:
           destination: bm.calendar.entry.edited
+        calendar-entry-for-member-edited:
+          destination: bm.calendar.entry.for.member.edited
         calendar-entry-removed:
           destination: bm.calendar.entry.removed
       kafka:

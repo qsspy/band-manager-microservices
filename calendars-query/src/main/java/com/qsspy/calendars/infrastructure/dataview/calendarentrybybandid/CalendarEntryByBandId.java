@@ -20,7 +20,7 @@ class CalendarEntryByBandId {
     @PrimaryKey
     private Id key;
 
-    @Column("event_king")
+    @Column("event_kind")
     private String eventKind;
 
     @Column("payment_amount")

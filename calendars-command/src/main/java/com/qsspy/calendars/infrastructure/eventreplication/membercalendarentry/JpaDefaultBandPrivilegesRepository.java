@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Repository
@@ -23,4 +24,11 @@ interface JpaDefaultBandPrivilegesRepository extends JpaRepository<DefaultBandPr
            WHERE p.bandId = :bandId
            """)
     List<DefaultCalendarEntryUserPrivilegesDTO> findDefaultCalendarEntryUserPrivileges(final UUID bandId);
+
+    @Query("""
+           SELECT b.id.memberId
+           FROM BAND_MEMBER b
+           WHERE b.id.bandId = :bandId
+           """)
+    Set<UUID> findBandMemberIds(final UUID bandId);
 }

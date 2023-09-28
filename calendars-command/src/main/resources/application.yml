@@ -52,6 +52,10 @@ spring:
           destination: bm.calendar.entry.edited
           producer:
             partition-key-expression: headers['partitionKey']
+        calendar-entry-for-member-edited:
+          destination: bm.calendar.entry.for.member.edited
+          producer:
+            partition-key-expression: headers['partitionKey']
         calendar-entry-removed:
           destination: bm.calendar.entry.removed
           producer:
