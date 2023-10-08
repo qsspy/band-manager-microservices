@@ -21,6 +21,6 @@ class BandMemberAddedEventEntryReplicationProcessor implements DataPropagationEv
                 .map(dto -> EventMapper.toNotificationEvent(dto, event.memberId()))
                 .toList();
 
-        publisher.publishAll(notificationEvents, PublishingMode.ASYNC);
+        publisher.publishAll(notificationEvents, PublishingMode.BATCH_ASYNC_WITH_BLOCKING);
     }
 }

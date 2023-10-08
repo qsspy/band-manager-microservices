@@ -52,7 +52,7 @@ class BandDefaultPrivilegesChangedEventProcessor implements DataPropagationEvent
                 .map(entryIdWithMemberIdDTO -> EventMapper.toNotificationEvent(event, entryIdWithMemberIdDTO))
                 .toList();
 
-        publisher.publishAll(events, PublishingMode.ASYNC);
+        publisher.publishAll(events, PublishingMode.BATCH_ASYNC_WITH_BLOCKING);
 
 
     }

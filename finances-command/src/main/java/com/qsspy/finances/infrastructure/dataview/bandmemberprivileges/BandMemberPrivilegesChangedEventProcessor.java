@@ -73,7 +73,7 @@ class BandMemberPrivilegesChangedEventProcessor implements DataPropagationEventP
         }
 
         repository.save(privileges);
-        publisher.publishAll(events, PublishingMode.ASYNC);
+        publisher.publishAll(events, PublishingMode.BATCH_ASYNC_WITH_BLOCKING);
     }
 
     private void handleNewBandMemberPrivileges(final BandMemberPrivilegesChangedEvent event) {

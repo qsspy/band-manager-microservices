@@ -21,6 +21,6 @@ class CalendarEntryAddedForMemberEventProcessor implements DomainEventProcessor<
                 .map(userPrivileges -> EventMapper.toNotificationEvent(event, userPrivileges))
                 .toList();
 
-        publisher.publishAll(events, PublishingMode.ASYNC);
+        publisher.publishAll(events, PublishingMode.BATCH_ASYNC_WITH_BLOCKING);
     }
 }

@@ -22,6 +22,6 @@ class CalendarEntryAddedEventProcessor implements DomainEventProcessor<CalendarE
                 .map(entity -> EventMapper.toNotificationEvent(entity, event))
                 .toList();
 
-        publisher.publishAll(events, PublishingMode.ASYNC);
+        publisher.publishAll(events, PublishingMode.BATCH_ASYNC_WITH_BLOCKING);
     }
 }

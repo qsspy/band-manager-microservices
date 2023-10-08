@@ -21,6 +21,6 @@ class CalendarEntryRemovedForMemberEventProcessor implements DomainEventProcesso
                 .map(memberId -> EventMapper.toNotificationEvent(event, memberId))
                 .toList();
 
-        publisher.publishAll(events, PublishingMode.ASYNC);
+        publisher.publishAll(events, PublishingMode.BATCH_ASYNC_WITH_BLOCKING);
     }
 }

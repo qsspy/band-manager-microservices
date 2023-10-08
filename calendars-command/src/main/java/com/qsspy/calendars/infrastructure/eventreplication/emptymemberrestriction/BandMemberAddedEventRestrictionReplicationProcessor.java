@@ -21,6 +21,6 @@ class BandMemberAddedEventRestrictionReplicationProcessor implements DataPropaga
                 .map(entry -> EventMapper.toNotificationEvent(entry, event))
                 .toList();
 
-        publisher.publishAll(events, PublishingMode.ASYNC);
+        publisher.publishAll(events, PublishingMode.BATCH_ASYNC_WITH_BLOCKING);
     }
 }

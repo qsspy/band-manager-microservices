@@ -22,7 +22,7 @@ class FinanceEntryAddedByMembersPrivilegesEventProcessor implements DomainEventP
                 .map(privileges -> EventMapper.toMemberFinanceEntryUpdatedNotificationEvent(event, privileges.getId().getMemberId(), calculateEntryVisibility(privileges, event)))
                 .toList();
 
-        publisher.publishAll(notificationEvents, PublishingMode.ASYNC);
+        publisher.publishAll(notificationEvents, PublishingMode.BATCH_ASYNC_WITH_BLOCKING);
     }
 
     private boolean calculateEntryVisibility(final BandMemberPrivileges privileges, final FinanceEntryAddedEvent event) {

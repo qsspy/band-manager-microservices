@@ -2,14 +2,17 @@ package com.qsspy.commons.port.output.publisher.notification;
 
 import com.qsspy.commons.architecture.eda.NotificationEvent;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Slf4j
 @Component
@@ -41,10 +44,20 @@ class MessageBrokerNotificationEventPublisher implements NotificationEventPublis
 
     @Override
     public void publishAll(final Collection<NotificationEvent> events, final PublishingMode publishingMode) {
-        if(PublishingMode.SYNC == publishingMode) {
-            publishSynchronously(events);
+        switch (publishingMode) {
+            case SYNC -> publishSynchronously(events);
+            case ASYNC -> publishAsynchronously(events);
+            case BATCH_ASYNC_WITH_BLOCKING -> publishBatchAsyncWithBlocking(events);
         }
-        publishAsynchronously(events);
+    }
+
+    @SneakyThrows
+    private void publishBatchAsyncWithBlocking(final Collection<NotificationEvent> events) {
+        final var publishingTasks = new ArrayList<Future<?>>();
+        for(final var event : events) {
+            publishingTasks.add(asyncPublishingExecutor.submit(() -> publish(event)));
+        }
+        publishingTasks.forEach(Future::get);
     }
 
     private void publishAsynchronously(final Collection<NotificationEvent> events) {

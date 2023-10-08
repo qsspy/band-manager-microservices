@@ -25,6 +25,6 @@ class BandMemberRemovedEventRestrictionsProcessor implements DataPropagationEven
                 .map(dto -> EventMapper.toNotificationEvent(event, dto))
                 .toList();
 
-        publisher.publishAll(notificationEvents, PublishingMode.ASYNC);
+        publisher.publishAll(notificationEvents, PublishingMode.BATCH_ASYNC_WITH_BLOCKING);
     }
 }
