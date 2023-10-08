@@ -35,6 +35,6 @@ record BandMemberRemovedNotificationEvent(
 
     @Override
     public Object partitionKey() {
-        return memberId;
+        return eventId;
     }
 }

@@ -43,6 +43,6 @@ record FinanceEntryUpdatedNotificationEvent(
 
         @Override
         public Object partitionKey() {
-                return bandId;
+                return eventId;
         }
 }

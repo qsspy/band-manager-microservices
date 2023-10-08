@@ -31,6 +31,8 @@ spring:
       default:
         group: ${spring.application.name}
         content-type: application/json
+        consumer:
+          concurrency: 3
       bindings:
         band-member-added:
           destination: bm.band.member.added
@@ -42,5 +44,5 @@ spring:
           destination: bm.band.default.privileges.changed
       kafka:
         binder:
-          auto-create-topics: true #TODO remove for manual topic creation
+          auto-create-topics: false
           brokers: kafka1:9091,kafka2:9092,kafka3:9093

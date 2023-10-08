@@ -39,6 +39,6 @@ record CalendarEntryMemberEmptyRestrictionCreatedNotificationEvent(
 
     @Override
     public Object partitionKey() {
-        return bandId;
+        return eventId;
     }
 }

@@ -37,6 +37,6 @@ public record UserRegisteredEvent(
 
     @Override
     public Object partitionKey() {
-        return userId;
+        return eventId;
     }
 }

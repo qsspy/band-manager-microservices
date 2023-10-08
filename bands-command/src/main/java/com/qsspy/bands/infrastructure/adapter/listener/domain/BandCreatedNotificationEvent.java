@@ -34,6 +34,6 @@ record BandCreatedNotificationEvent(
 
     @Override
     public Object partitionKey() {
-        return adminId;
+        return eventId;
     }
 }

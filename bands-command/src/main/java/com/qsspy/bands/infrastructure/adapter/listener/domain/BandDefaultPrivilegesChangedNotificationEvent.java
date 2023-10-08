@@ -44,6 +44,6 @@ record BandDefaultPrivilegesChangedNotificationEvent(
 
     @Override
     public Object partitionKey() {
-        return bandId;
+        return eventId;
     }
 }

@@ -37,6 +37,6 @@ record BandMemberAddedNotificationEvent(
 
     @Override
     public Object partitionKey() {
-        return memberId;
+        return eventId;
     }
 }
