@@ -1,13 +1,19 @@
 package com.qsspy.gateway.bands.command;
 
 import com.qsspy.authservice.application.authorizer.port.input.AuthInterceptor;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementNotificationEvent;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementStartedNotificationEvent;
+import com.qsspy.commons.port.output.publisher.notification.NotificationEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.UUID;
+
+import static com.qsspy.commons.port.output.publisher.notification.MeasurementType.DEFAULT_PRIVILEGES_CHANGE;
 
 @RestController
 @RequestMapping("/api/v1/bands")
@@ -17,6 +23,7 @@ class BandCommandController {
 
     private final AuthInterceptor authInterceptor;
     private final BandsCommandConnector bandsCommandConnector;
+    private final NotificationEventPublisher publisher;
 
     @PostMapping
     ResponseEntity<Object> createBand(
@@ -50,12 +57,31 @@ class BandCommandController {
                 token,
                 bandId,
                 context -> {
+
+                    final var startTime = Instant.now().toEpochMilli();
+                    log.warn("Started processing command.");
+                    publisher.publish(new MeasurementStartedNotificationEvent(
+                            UUID.randomUUID(),
+                            startTime,
+                            DEFAULT_PRIVILEGES_CHANGE
+                    ));
+
                     try {
                         bandsCommandConnector.changeBandDefaultPrivileges(bandId, request);
                         return ResponseEntity.ok().build();
                     } catch (final Exception exception) {
                         log.error("An error occurred during changing band default privileges", exception);
                         return ResponseEntity.internalServerError().build();
+                    } finally {
+                        final var endTime = Instant.now().toEpochMilli();
+                        log.warn("Finished processing command in {}ms.", endTime - startTime);
+                        publisher.publish(new MeasurementNotificationEvent(
+                                UUID.randomUUID(),
+                                endTime,
+                                DEFAULT_PRIVILEGES_CHANGE,
+                                0,
+                                null
+                        ));
                     }
                 },
                 () -> ResponseEntity.internalServerError().build()
