@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -51,13 +52,20 @@ class MessageBrokerNotificationEventPublisher implements NotificationEventPublis
         }
     }
 
-    @SneakyThrows
     private void publishBatchAsyncWithBlocking(final Collection<NotificationEvent> events) {
         final var publishingTasks = new ArrayList<Future<?>>();
+
         for(final var event : events) {
             publishingTasks.add(asyncPublishingExecutor.submit(() -> publish(event)));
         }
-        publishingTasks.forEach(Future::get);
+
+        publishingTasks.forEach(job -> {
+            try {
+                job.get();
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void publishAsynchronously(final Collection<NotificationEvent> events) {
