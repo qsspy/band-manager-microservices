@@ -6,6 +6,7 @@ spring:
       kafka:
         binder:
           auto-create-topics: true
+          min-partition-count: 3
           brokers: localhost:9091,localhost:9092,localhost:9093
 server:
   port: 8086
