@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(
 		scanBasePackages = {
-				"com.qsspy.calendars"
+				"com.qsspy.calendars",
+				"com.qsspy.commons.port.output.publisher"
 		}
 )
 public class CalendarsQueryApplication {

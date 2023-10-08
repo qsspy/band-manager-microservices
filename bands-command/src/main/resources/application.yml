@@ -24,6 +24,8 @@ spring:
         consumer:
           concurrency: 3
       bindings:
+        measurements:
+          destination: bm.measurements
         user-registered:
           destination: bm.user.registered
         band-created:
@@ -53,3 +55,4 @@ spring:
         binder:
           auto-create-topics: false
           brokers: kafka1:9091,kafka2:9092,kafka3:9093
+          required-acks: all

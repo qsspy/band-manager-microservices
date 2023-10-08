@@ -1,12 +1,16 @@
 package com.qsspy.gateway.bands.command;
 
 import com.qsspy.authservice.application.authorizer.port.input.AuthInterceptor;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementStartedNotificationEvent;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementType;
+import com.qsspy.commons.port.output.publisher.notification.NotificationEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @RestController
@@ -17,6 +21,7 @@ class BandCommandController {
 
     private final AuthInterceptor authInterceptor;
     private final BandsCommandConnector bandsCommandConnector;
+    private final NotificationEventPublisher publisher;
 
     @PostMapping
     ResponseEntity<Object> createBand(
@@ -50,6 +55,13 @@ class BandCommandController {
                 token,
                 bandId,
                 context -> {
+
+                    publisher.publish(new MeasurementStartedNotificationEvent(
+                            UUID.randomUUID(),
+                            Instant.now().toEpochMilli(),
+                            MeasurementType.DEFAULT_PRIVILEGES_REPLICATED
+                    ));
+
                     try {
                         bandsCommandConnector.changeBandDefaultPrivileges(bandId, request);
                         return ResponseEntity.ok().build();

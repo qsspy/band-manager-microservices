@@ -5,6 +5,7 @@ spring:
     schema-action: create_if_not_exists
     request:
       timeout: 10s
+      consistency: three
     connection:
       connect-timeout: 10s
       init-query-timeout: 10s
@@ -47,6 +48,8 @@ spring:
         consumer:
           concurrency: 3
       bindings:
+        measurements:
+          destination: bm.measurements
         band-member-removed:
           destination: bm.band.member.removed
         calendar-entry-member-empty-restriction-created:
@@ -82,6 +85,9 @@ spring:
           consumer:
             batch-mode: true
       kafka:
+        default:
+          producer:
+            sync: true
         binder:
           auto-create-topics: false
           brokers: kafka1:9091,kafka2:9092,kafka3:9093

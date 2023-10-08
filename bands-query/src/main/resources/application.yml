@@ -5,6 +5,7 @@ spring:
     schema-action: create_if_not_exists
     request:
       timeout: 10s
+      consistency: three
     connection:
       connect-timeout: 10s
       init-query-timeout: 10s
@@ -34,6 +35,8 @@ spring:
         consumer:
           concurrency: 3
       bindings:
+        measurements:
+          destination: bm.measurements
         band-member-added:
           destination: bm.band.member.added
         band-member-removed:
@@ -43,6 +46,9 @@ spring:
         band-default-privileges-changed:
           destination: bm.band.default.privileges.changed
       kafka:
+        default:
+          producer:
+            sync: true
         binder:
           auto-create-topics: false
           brokers: kafka1:9091,kafka2:9092,kafka3:9093
