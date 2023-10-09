@@ -28,6 +28,8 @@ spring:
         consumer:
           concurrency: 3
       bindings:
+        measurements:
+          destination: bm.measurements
         band-member-added:
           destination: bm.band.member.added
         band-member-removed:
@@ -75,9 +77,6 @@ spring:
           producer:
             partition-key-expression: headers['partitionKey']
       kafka:
-        default:
-          producer:
-            sync: true
         binder:
           auto-create-topics: false
           brokers: kafka1:9091,kafka2:9092,kafka3:9093

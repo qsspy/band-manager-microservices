@@ -6,9 +6,15 @@ import com.qsspy.calendars.application.entry.restriction.port.input.RestrictMemb
 import com.qsspy.calendars.application.entry.restriction.port.input.RestrictMemberPrivilegesForEntryCommandHandler;
 import com.qsspy.calendars.domain.calendar.CalendarEntry;
 import com.qsspy.commons.port.output.publisher.domain.DomainEventPublisher;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementNotificationEvent;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementType;
+import com.qsspy.commons.port.output.publisher.notification.NotificationEventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -18,6 +24,7 @@ class RestrictMemberPrivilegesForEntryCommandHandlerImpl implements RestrictMemb
     private final CalendarEntryGetRepository getRepository;
     private final CalendarEntrySaveRepository saveRepository;
     private final DomainEventPublisher publisher;
+    private final NotificationEventPublisher notificationEventPublisher;
 
     @Override
     public void handle(final RestrictMemberPrivilegesForEntryCommand command) {
@@ -39,6 +46,11 @@ class RestrictMemberPrivilegesForEntryCommandHandlerImpl implements RestrictMemb
         final var editData = CommandToDtoMapper.toDomainData(command);
         entry.editMemberEntryPrivileges(editData);
         saveRepository.save(entry);
+        notificationEventPublisher.publish(new MeasurementNotificationEvent(
+                UUID.randomUUID(),
+                Instant.now().toEpochMilli(),
+                MeasurementType.CALENDAR_DATA_REPLICATED
+        ));
         publisher.publishAll(entry.flushEvents());
     }
 }

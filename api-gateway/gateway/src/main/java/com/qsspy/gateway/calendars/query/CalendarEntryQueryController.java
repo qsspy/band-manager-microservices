@@ -2,12 +2,17 @@ package com.qsspy.gateway.calendars.query;
 
 import com.qsspy.authservice.application.authorizer.port.input.AuthInterceptor;
 import com.qsspy.authservice.application.authorizer.port.input.UserContext;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementNotificationEvent;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementStartedNotificationEvent;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementType;
+import com.qsspy.commons.port.output.publisher.notification.NotificationEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @RestController
@@ -18,6 +23,7 @@ class CalendarEntryQueryController {
 
     private final AuthInterceptor authInterceptor;
     private final CalendarsQueryConnector connector;
+    private final NotificationEventPublisher publisher;
 
     @GetMapping("/calendar/entries/member-privileges")
     ResponseEntity<GetCalendarEntryMemberRestrictionQueryResponse> getCalenderEntryMemberRestrictions(
@@ -74,12 +80,25 @@ class CalendarEntryQueryController {
                 bandId,
                 UserContext.Privileges::canAccessCalendar,
                 context -> {
+
+                    publisher.publish(new MeasurementStartedNotificationEvent(
+                            UUID.randomUUID(),
+                            Instant.now().toEpochMilli(),
+                            MeasurementType.CALENDAR_DATA_QUERIED
+                    ));
+
                     try {
                         final var response = connector.getCalenderEntries(context.userId(), context.userOwnBandId() != null, bandId);
                         return ResponseEntity.ok(response);
                     } catch (final Exception exception) {
                         log.error("An error occurred while fetching calendar entries", exception);
                         return ResponseEntity.internalServerError().build();
+                    } finally {
+                        publisher.publish(new MeasurementNotificationEvent(
+                                UUID.randomUUID(),
+                                Instant.now().toEpochMilli(),
+                                MeasurementType.CALENDAR_DATA_QUERIED
+                        ));
                     }
                 },
                 () -> ResponseEntity.internalServerError().build()

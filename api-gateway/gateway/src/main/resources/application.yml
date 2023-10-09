@@ -45,9 +45,6 @@ spring:
         band-member-privileges-changed:
           destination: bm.band.member.privileges.changed
       kafka:
-        default:
-          producer:
-            sync: true
         binder:
           auto-create-topics: false
           brokers: kafka1:9091,kafka2:9092,kafka3:9093

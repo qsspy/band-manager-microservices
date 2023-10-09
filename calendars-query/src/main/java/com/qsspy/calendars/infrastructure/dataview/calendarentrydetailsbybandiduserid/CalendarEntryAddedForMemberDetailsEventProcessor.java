@@ -2,14 +2,21 @@ package com.qsspy.calendars.infrastructure.dataview.calendarentrydetailsbybandid
 
 import com.qsspy.calendars.infrastructure.adapter.listener.calendarentryaddedformember.CalendarEntryAddedForMemberEvent;
 import com.qsspy.commons.architecture.eda.DataPropagationEventProcessor;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementNotificationEvent;
+import com.qsspy.commons.port.output.publisher.notification.MeasurementType;
+import com.qsspy.commons.port.output.publisher.notification.NotificationEventPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
 class CalendarEntryAddedForMemberDetailsEventProcessor implements DataPropagationEventProcessor<CalendarEntryAddedForMemberEvent> {
 
     private final CalendarEntryDetailsByBandIdUserIdCassandraRepository repository;
+    private final NotificationEventPublisher publisher;
 
     @Override
     public void process(final CalendarEntryAddedForMemberEvent event) {
@@ -28,5 +35,11 @@ class CalendarEntryAddedForMemberDetailsEventProcessor implements DataPropagatio
                 .build();
 
         repository.save(entity);
+
+        publisher.publish(new MeasurementNotificationEvent(
+                UUID.randomUUID(),
+                Instant.now().toEpochMilli(),
+                MeasurementType.CALENDAR_DATA_REPLICATED
+        ));
     }
 }

@@ -47,6 +47,8 @@ spring:
         consumer:
           concurrency: 3
       bindings:
+        measurements:
+          destination: bm.measurements
         band-member-removed:
           destination: bm.band.member.removed
         calendar-entry-member-empty-restriction-created:
